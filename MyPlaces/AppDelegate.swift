@@ -23,6 +23,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         manager.append(place2)
         let place3 = PlaceTourist(name: "Museu", description: "Cosmocaixa", discount_tourist: "30", image_in: nil)
         manager.append(place3)
+        let place3 = PlaceTourist(name: "Museu", description: "de la Pell", discount_tourist: "10", image_in: nil)
+        manager.append(place3)
         
         return true
     }

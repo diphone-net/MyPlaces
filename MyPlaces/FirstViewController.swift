@@ -66,7 +66,7 @@ class FirstViewController: UITableViewController {
         let mida: CGFloat = 50
         imageIcon.frame = CGRect(x:wt - mida - 10, y:40, width:mida, height:mida)
         cell.contentView.addSubview(imageIcon)
-        // test commit and push
+        
         return cell
     }
     

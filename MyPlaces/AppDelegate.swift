@@ -16,6 +16,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        let manager = ManagerPlaces.share()
+        let place1 = Place(name: "Plaça", description: "La meva plaça", image_in: nil)
+        manager.append(place1)
+        let place2 = Place(name: "carrer", description: "on vaig néixer", image_in: nil)
+        manager.append(place2)
+        let place3 = PlaceTourist(name: "Museu", description: "Cosmocaixa", discount_tourist: "30", image_in: nil)
+        manager.append(place3)
+        
         return true
     }
 

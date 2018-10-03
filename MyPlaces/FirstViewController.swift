@@ -10,14 +10,22 @@ import UIKit
 
 class FirstViewController: UITableViewController {
 
+    let m_provider = ManagerPlaces.share()
+    
+    // nou pel retorn despres d'afegir n elemnt
+    override func viewDidAppear(_ animated: Bool) {
+        print ("hello")
+        self.tableView.reloadData()
+    }
+    
     override func viewDidLoad() {
-        super.viewDidLoad()
+	        super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Numero de elementos del manager
-        return ManagerPlaces.share().GetCount()
+        return m_provider.GetCount()
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -26,11 +34,29 @@ class FirstViewController: UITableViewController {
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Detectar pulsación en un elemento
-        // TODO: Enviar al detall
+        
+        // he creat un segon segue per fer un show detail (no se si es correcte, pero provo)
+        // aixi si es clica al boto 'add' ho faig com es feia al video pero si es consulta dono la opció a tornar show VS show detail
+        //let dc:DetailController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailController") as! DetailController
+        print (indexPath.row)
+        print (indexPath[1])
+        
+        let place: Place = m_provider.GetItemAt(position: indexPath[1])!
+        //dc.place = place
+        //present(dc, animated: true, completion: nil)
+        performSegue(withIdentifier: "show", sender: place)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "show" {
+            if let destinationVC = segue.destination as? DetailController {
+                destinationVC.place = sender as? Place
+            }
+        }
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        // Devolver la altura de una fila situada en una posicion determinada
+        // Devolver la altura de una fila situada en una posicion determinadaccc
         return 90
     }
     
@@ -41,12 +67,11 @@ class FirstViewController: UITableViewController {
         let fuente: UIFont = UIFont(name: "Arial", size: 12)!
         let fuenteTitulo = UIFont.boldSystemFont(ofSize: 14)
         
-        
         // Add subviews to cell
         // UILabel and UIImageView
         var label: UILabel
 
-        let place: Place = ManagerPlaces.share().GetItemAt(position: indexPath[1])! // TODO: revisar que fem
+        let place: Place = m_provider.GetItemAt(position: indexPath[1])! // TODO: revisar que fem
         
         // afegim els elements del place i touristplace
         for element in 0...3{
@@ -61,12 +86,12 @@ class FirstViewController: UITableViewController {
                 cell.contentView.addSubview(label)
             }
         }
-        
-        let imageIcon: UIImageView = UIImageView(image: UIImage(named:"sun.png"))
-        let mida: CGFloat = 50
-        imageIcon.frame = CGRect(x:wt - mida - 10, y:40, width:mida, height:mida)
-        cell.contentView.addSubview(imageIcon)
-        
+        if (place.image != nil){
+            let imageIcon: UIImageView = UIImageView(image: UIImage(data: place.image!))
+            let mida: CGFloat = 50
+            imageIcon.frame = CGRect(x:wt - mida - 10, y:40, width:mida, height:mida)
+            cell.contentView.addSubview(imageIcon)
+        }
         return cell
     }
     

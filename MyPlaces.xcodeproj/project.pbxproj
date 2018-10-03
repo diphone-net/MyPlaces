@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8A0D9CE9215E731800854E72 /* yoga.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8A0D9CE5215E731700854E72 /* yoga.jpg */; };
+		8A0D9CEA215E731800854E72 /* ball.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8A0D9CE6215E731700854E72 /* ball.jpg */; };
+		8A0D9CEB215E731800854E72 /* moon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8A0D9CE7215E731700854E72 /* moon.jpg */; };
+		8A0D9CEC215E731800854E72 /* ghost.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A0D9CE8215E731800854E72 /* ghost.png */; };
 		8A0FE68A215A03800085C110 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0FE689215A03800085C110 /* AppDelegate.swift */; };
 		8A0FE68C215A03800085C110 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0FE68B215A03800085C110 /* FirstViewController.swift */; };
 		8A0FE68E215A03800085C110 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0FE68D215A03800085C110 /* SecondViewController.swift */; };
@@ -22,6 +26,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8A0D9CE5215E731700854E72 /* yoga.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = yoga.jpg; sourceTree = "<group>"; };
+		8A0D9CE6215E731700854E72 /* ball.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ball.jpg; sourceTree = "<group>"; };
+		8A0D9CE7215E731700854E72 /* moon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = moon.jpg; sourceTree = "<group>"; };
+		8A0D9CE8215E731800854E72 /* ghost.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ghost.png; sourceTree = "<group>"; };
 		8A0FE686215A03800085C110 /* MyPlaces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyPlaces.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A0FE689215A03800085C110 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8A0FE68B215A03800085C110 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -105,6 +113,10 @@
 		8A94E4D9215AAA1600D958B1 /* img */ = {
 			isa = PBXGroup;
 			children = (
+				8A0D9CE6215E731700854E72 /* ball.jpg */,
+				8A0D9CE8215E731800854E72 /* ghost.png */,
+				8A0D9CE7215E731700854E72 /* moon.jpg */,
+				8A0D9CE5215E731700854E72 /* yoga.jpg */,
 				8A94E4DC215AAA8A00D958B1 /* sun.png */,
 			);
 			path = img;
@@ -174,8 +186,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				8A0FE696215A03820085C110 /* LaunchScreen.storyboard in Resources */,
+				8A0D9CEC215E731800854E72 /* ghost.png in Resources */,
+				8A0D9CE9215E731800854E72 /* yoga.jpg in Resources */,
+				8A0D9CEB215E731800854E72 /* moon.jpg in Resources */,
 				8A94E4DD215AAA8A00D958B1 /* sun.png in Resources */,
 				8A0FE693215A03820085C110 /* Assets.xcassets in Resources */,
+				8A0D9CEA215E731800854E72 /* ball.jpg in Resources */,
 				8A0FE691215A03800085C110 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -342,6 +358,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QVQU23H4GB;
 				INFOPLIST_FILE = MyPlaces/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -360,6 +377,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QVQU23H4GB;
 				INFOPLIST_FILE = MyPlaces/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

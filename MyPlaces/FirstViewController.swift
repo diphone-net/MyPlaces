@@ -13,13 +13,12 @@ class FirstViewController: UITableViewController {
     let m_provider = ManagerPlaces.share()
     
     // nou pel retorn despres d'afegir n elemnt
-    override func viewDidAppear(_ animated: Bool) {
-        print ("hello")
+    override func viewWillAppear(_ animated: Bool) {
         self.tableView.reloadData()
     }
     
     override func viewDidLoad() {
-	        super.viewDidLoad()
+        super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     }
     
@@ -38,9 +37,6 @@ class FirstViewController: UITableViewController {
         // he creat un segon segue per fer un show detail (no se si es correcte, pero provo)
         // aixi si es clica al boto 'add' ho faig com es feia al video pero si es consulta dono la opció a tornar show VS show detail
         //let dc:DetailController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailController") as! DetailController
-        print (indexPath.row)
-        print (indexPath[1])
-        
         let place: Place = m_provider.GetItemAt(position: indexPath[1])!
         //dc.place = place
         //present(dc, animated: true, completion: nil)
@@ -71,7 +67,7 @@ class FirstViewController: UITableViewController {
         // UILabel and UIImageView
         var label: UILabel
 
-        let place: Place = m_provider.GetItemAt(position: indexPath[1])! // TODO: revisar que fem
+        let place: Place = m_provider.GetItemAt(position: indexPath[1])!
         
         // afegim els elements del place i touristplace
         for element in 0...3{

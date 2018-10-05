@@ -20,13 +20,13 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
         return placesTypes.count // num d'elements
     }
     
-    // necessari per VciewDataSource
+    // necessari per ViewDataSource
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return placesTypes[row]
     }
     
     // controla el canvi al pickerView
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {        
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         showTuristicMode(isTuristic: row == 1)
     }
 
@@ -45,8 +45,9 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
     @IBOutlet weak var btnRemove: UIButton!
     
     @IBOutlet weak var pkrType: UIPickerView!
-    let placesTypes = ["Generic place","Touristic place"]
     
+    let placesTypes = ["Generic place","Touristic place"]
+
     var m_provider = ManagerPlaces.share()
     
     var place: Place?
@@ -54,10 +55,10 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // necessari per ViewDataSource
         self.pkrType.delegate = self
         self.pkrType.dataSource = self
         
-        // sempre arribem aqui amb place assignat pero pel que fos, crido aquesta funcio si fos que no
         self.constraintHeight.constant = 400
         
         enableEdition(enable: place == nil)
@@ -88,16 +89,12 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
     private func showTuristicMode(isTuristic: Bool){
         lblDiscount.isHidden = !isTuristic
         txtDiscount.isHidden = !isTuristic
-        //segType.selectedSegmentIndex = isTuristic ? 1 : 0
         pkrType.selectRow(isTuristic ? 1 : 0, inComponent:0, animated: true)
-
     }
     
     private func enableEdition(enable: Bool){
         txtName.isEnabled = enable
         txtNotes.isUserInteractionEnabled = enable
-        // txtId by desing
-        //segType.isEnabled = enable
         pkrType.isUserInteractionEnabled = enable
         txtDiscount.isEnabled = enable
         btnUndo.isHidden = !enable
@@ -106,33 +103,29 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
         btnRemove.isHidden = enable
     }
     
-   // MARK: Codi temporal PLA1
-
-    @IBAction func removeTemporal(_ sender: Any) {
+    @IBAction func btnRemove(_ sender: Any) {
         // el boton solo es visible cuando place tiene valor
         m_provider.remove(place!)
         navigationController?.popViewController(animated: true)
-        //undoTemporal(sender)
     }
     
-    @IBAction func saveTemporal(_ sender: Any) {
-        //if segType.selectedSegmentIndex == 0 {
-        if true { // todo
+    @IBAction func btnSave(_ sender: Any) {
+        if pkrType.selectedRow(inComponent: 0) == 0 {
             let place = Place(name: txtName.text!, description: txtNotes.text!, image_in: img.image?.pngData())
             m_provider.append(place)
         }else{
             let tplace = PlaceTourist(name: txtName.text!, description: txtNotes.text!, discount_tourist: txtDiscount.text!, image_in: img.image?.pngData())
             m_provider.append(tplace)	
         }
-        undoTemporal(sender)
+        btnBack(sender)
     }
     
  
-    @IBAction func undoTemporal(_ sender: Any) {
+    @IBAction func btnBack(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func randomTemporal(_ sender: Any) {
+    @IBAction func btnRandomTemporal(_ sender: Any) {
         let texts = ["Plaça", "Museu", "Carrer", "Botiga", "Lloc indeterminat"]
         let descripcions = ["blava del cel blau", "de les arts", "angel suprem", "groc pàlid", "maravellós"]
         let imgs = ["ball.jpg", "ghost.png", "yoga.jpg"]
@@ -151,13 +144,6 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
         
         rand = Int(arc4random_uniform(UInt32(imgs.count)))
         img.image = UIImage(named:imgs[rand])
-        //print(imgs[rand])
-        //img = UIImageView(image:
-        //let mida: CGFloat = 50
-        //imageIcon.frame = CGRect(x:wt - mida - 10, y:40, width:mida, height:mida)
-    }
-    @IBAction func Close(_ sender: Any) {
-        
     }
     
     /*
@@ -169,5 +155,4 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
         // Pass the selected object to the new view controller.
     }
     */
-
 }

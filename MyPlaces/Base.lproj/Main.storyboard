@@ -123,7 +123,7 @@
                                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" title="Cancel"/>
                                                 <connections>
-                                                    <action selector="undoTemporal:" destination="6hV-JK-xMm" eventType="touchUpInside" id="Ls3-EL-V1v"/>
+                                                    <action selector="btnBack:" destination="6hV-JK-xMm" eventType="touchUpInside" id="Ls3-EL-V1v"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zpi-pv-qyW">
@@ -131,7 +131,7 @@
                                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" title="Random"/>
                                                 <connections>
-                                                    <action selector="randomTemporal:" destination="6hV-JK-xMm" eventType="touchUpInside" id="peU-Zi-oJf"/>
+                                                    <action selector="btnRandomTemporal:" destination="6hV-JK-xMm" eventType="touchUpInside" id="peU-Zi-oJf"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GbO-k4-SUW">
@@ -139,7 +139,7 @@
                                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" title="Save"/>
                                                 <connections>
-                                                    <action selector="saveTemporal:" destination="6hV-JK-xMm" eventType="touchUpInside" id="OZh-vf-y69"/>
+                                                    <action selector="btnSave:" destination="6hV-JK-xMm" eventType="touchUpInside" id="OZh-vf-y69"/>
                                                 </connections>
                                             </button>
                                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FPf-Ro-vi2">
@@ -168,7 +168,7 @@
                                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" title="Remove"/>
                                                 <connections>
-                                                    <action selector="removeTemporal:" destination="6hV-JK-xMm" eventType="touchUpInside" id="fet-eL-kTd"/>
+                                                    <action selector="btnRemove:" destination="6hV-JK-xMm" eventType="touchUpInside" id="fet-eL-kTd"/>
                                                 </connections>
                                             </button>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Lorem " textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="jJD-ZP-DqY">

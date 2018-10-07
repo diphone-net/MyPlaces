@@ -9,7 +9,6 @@
 import Foundation
 import MapKit
 
-
 class Place{
 
     enum PlacesTypes{

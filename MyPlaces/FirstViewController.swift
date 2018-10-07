@@ -37,22 +37,22 @@ class FirstViewController: UITableViewController {
         // he creat un segon segue per fer un show detail (no se si es correcte, pero provo)
         // aixi si es clica al boto 'add' ho faig com es feia al video pero si es consulta dono la opció a tornar show VS show detail
         //let dc:DetailController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailController") as! DetailController
-        let place: Place = m_provider.GetItemAt(position: indexPath[1])!
+        let place: Place = m_provider.GetItemAt(position: indexPath[1])
         //dc.place = place
         //present(dc, animated: true, completion: nil)
         performSegue(withIdentifier: "show", sender: place)
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) { 
         if segue.identifier == "show" {
             if let destinationVC = segue.destination as? DetailController {
                 destinationVC.place = sender as? Place
-            }
+            } 
         }
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        // Devolver la altura de una fila situada en una posicion determinadaccc
+        // Devolver la altura de una fila situada en una posicion determinada
         return 90
     }
     
@@ -67,7 +67,7 @@ class FirstViewController: UITableViewController {
         // UILabel and UIImageView
         var label: UILabel
 
-        let place: Place = m_provider.GetItemAt(position: indexPath[1])!
+        let place: Place = m_provider.GetItemAt(position: indexPath[1])
         
         // afegim els elements del place i touristplace
         for element in 0...3{

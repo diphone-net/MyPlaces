@@ -19,25 +19,19 @@ class ManagerPlaces{
         return places.count
     }
     
-    func GetItemAt(position:Int) -> Place?{
-        // TODO: Revisar què tornar si no existeix a la def retorna Place
+    func GetItemAt(position:Int) -> Place{
         return places[position]
     }
     
-    func GetItemById(id:String) -> Place?{
+    func GetItemById(id:String) -> Place{
         var placesFound = places.filter({$0.id == id})
-        return placesFound.count == 1 ? placesFound[0] : nil
+        //return placesFound.count == 1 ? placesFound[0] : nil
+        // al meu parer hauria de retornar Place? pero vaja
+        return placesFound[0]
     }
     
     func remove(_ value: Place){
         places = places.filter({$0.id != value.id})
-//        for i in places.indices{
-//            if (palces[i].id == value.id){
-//                places.remove(at: i)
-//                // com que nomes n'hi pot haver un parem
-//                break
-//            }
-//        }
     }
     
     //MARK: Singleton
@@ -48,7 +42,4 @@ class ManagerPlaces{
     class func share() -> ManagerPlaces{
         return singletonManage
     }
-    
-    
-    
 }

@@ -80,7 +80,8 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
             txtDiscount.text = touristPlace.discount_tourist
             showTuristicMode(isTuristic: true)
         }
-        // TODO: segur que aixo es pot fer en 1 linia
+        
+        // TODO segur que aixo es pot fer en 1 linia")
         if (place!.image != nil){
             img.image = UIImage(data: place!.image!)
         }
@@ -110,6 +111,13 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
     }
     
     @IBAction func btnSave(_ sender: Any) {
+        if txtName.text!.count < 1 || txtNotes.text!.count < 1 {
+            let alert = UIAlertController(title: "Alerta", message: "Cal omplir tots els camps del Place per guardar-lo", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "D'acord", style: UIAlertAction.Style.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            return
+        }
+        
         if pkrType.selectedRow(inComponent: 0) == 0 {
             let place = Place(name: txtName.text!, description: txtNotes.text!, image_in: img.image?.pngData())
             m_provider.append(place)

@@ -10,54 +10,60 @@ import UIKit
 
 class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDataSource{
     
-    // obligat per ViewDataSource
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1 //num de columnes
-    }
 
-    // obligat per ViewDataSource
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return placesTypes.count // num d'elements
-    }
-    
-    // necessari per ViewDataSource
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return placesTypes[row]
-    }
-    
-    // controla el canvi al pickerView
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        showTuristicMode(isTuristic: row == 1)
-    }
 
     @IBOutlet weak var constraintHeight: NSLayoutConstraint!
     
-    @IBOutlet weak var txtName: UITextField!
     @IBOutlet weak var txtId: UITextField!
     @IBOutlet weak var txtDiscount: UITextField!
     @IBOutlet weak var lblDiscount: UILabel!
-    @IBOutlet weak var img: UIImageView!
-    @IBOutlet weak var txtNotes: UITextView!
     
     @IBOutlet weak var btnUndo: UIButton!
     @IBOutlet weak var btnRandom: UIButton!
     @IBOutlet weak var btnSave: UIButton!
     @IBOutlet weak var btnRemove: UIButton!
     
-    @IBOutlet weak var pkrType: UIPickerView!
-    
-    let placesTypes = ["Generic place","Touristic place"]
+    @IBOutlet weak var textName: UITextField!
+    @IBOutlet weak var textDescription: UITextView!
+    @IBOutlet weak var viewPicker: UIPickerView!
+    @IBOutlet weak var imagePicker: UIImageView!
+
+    let pickerElems1 = ["Generic place","Touristic place"]
 
     var m_provider = ManagerPlaces.share()
     
     var place: Place?
     
+    // MARK Codi requerit pel picker
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1 //num de columnes
+    }
+    
+    // obligat per ViewDataSource
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return pickerElems1.count // num d'elements
+    }
+    
+    // necessari per ViewDataSource
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return pickerElems1[row]
+    }
+    
+    // controla el canvi al pickerView
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        showTuristicMode(isTuristic: row == 1)
+    }
+    
+    @IBAction func btnSelectImage(_ sender: Any) {
+        #warning("pendent")
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // necessari per ViewDataSource
-        self.pkrType.delegate = self
-        self.pkrType.dataSource = self
+        viewPicker.delegate = self
+        viewPicker.dataSource = self
         
         self.constraintHeight.constant = 400
         
@@ -70,11 +76,11 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
     }
     
     private func fillData(){
-        txtName.text = place!.name
-        txtNotes.text = place!.description
+        textName.text = place!.name
+        textDescription.text = place!.description
         txtId.text = place!.id
         showTuristicMode(isTuristic: false)
-        pkrType.selectRow(0, inComponent: 0, animated: true)
+        viewPicker.selectRow(0, inComponent: 0, animated: true)
         if (place!.type != PlaceTourist.PlacesTypes.GenericPlace){
             let touristPlace = place as! PlaceTourist
             txtDiscount.text = touristPlace.discount_tourist
@@ -83,20 +89,20 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
         
         // TODO segur que aixo es pot fer en 1 linia")
         if (place!.image != nil){
-            img.image = UIImage(data: place!.image!)
+            imagePicker.image = UIImage(data: place!.image!)
         }
     }
     
     private func showTuristicMode(isTuristic: Bool){
         lblDiscount.isHidden = !isTuristic
         txtDiscount.isHidden = !isTuristic
-        pkrType.selectRow(isTuristic ? 1 : 0, inComponent:0, animated: true)
+        viewPicker.selectRow(isTuristic ? 1 : 0, inComponent:0, animated: true)
     }
     
     private func enableEdition(enable: Bool){
-        txtName.isEnabled = enable
-        txtNotes.isUserInteractionEnabled = enable
-        pkrType.isUserInteractionEnabled = enable
+        textName.isEnabled = enable
+        textDescription.isUserInteractionEnabled = enable
+        viewPicker.isUserInteractionEnabled = enable
         txtDiscount.isEnabled = enable
         btnUndo.isHidden = !enable
         btnRandom.isHidden = !enable
@@ -111,18 +117,18 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
     }
     
     @IBAction func btnSave(_ sender: Any) {
-        if txtName.text!.count < 1 || txtNotes.text!.count < 1 {
+        if textName.text!.count < 1 || textDescription.text!.count < 1 {
             let alert = UIAlertController(title: "Alerta", message: "Cal omplir tots els camps del Place per guardar-lo", preferredStyle: UIAlertController.Style.alert)
             alert.addAction(UIAlertAction(title: "D'acord", style: UIAlertAction.Style.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
             return
         }
         
-        if pkrType.selectedRow(inComponent: 0) == 0 {
-            let place = Place(name: txtName.text!, description: txtNotes.text!, image_in: img.image?.pngData())
+        if viewPicker.selectedRow(inComponent: 0) == 0 {
+            let place = Place(name: textName.text!, description: textDescription.text!, image_in: imagePicker.image?.pngData())
             m_provider.append(place)
         }else{
-            let tplace = PlaceTourist(name: txtName.text!, description: txtNotes.text!, discount_tourist: txtDiscount.text!, image_in: img.image?.pngData())
+            let tplace = PlaceTourist(name: textName.text!, description: textDescription.text!, discount_tourist: txtDiscount.text!, image_in: imagePicker.image?.pngData())
             m_provider.append(tplace)	
         }
         btnBack(sender)
@@ -139,9 +145,9 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
         let imgs = ["ball.jpg", "ghost.png", "yoga.jpg"]
         
         var rand = Int(arc4random_uniform(UInt32(texts.count)))
-        txtName.text = texts[rand]
+        textName.text = texts[rand]
         rand = Int(arc4random_uniform(UInt32(descripcions.count)))
-        txtNotes.text = descripcions[rand]
+        textDescription.text = descripcions[rand]
         if (Int(arc4random_uniform(2)) == 1){
             rand = Int(arc4random_uniform(100))
             txtDiscount.text = String(rand)
@@ -151,7 +157,7 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
         }
         
         rand = Int(arc4random_uniform(UInt32(imgs.count)))
-        img.image = UIImage(named:imgs[rand])
+        imagePicker.image = UIImage(named:imgs[rand])
     }
     
     /*

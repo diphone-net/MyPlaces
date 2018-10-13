@@ -181,6 +181,14 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fRR-rV-Q8u">
+                                                <rect key="frame" x="85" y="554" width="89" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="Select Image"/>
+                                                <connections>
+                                                    <action selector="btnSelectImage:" destination="6hV-JK-xMm" eventType="touchUpInside" id="MdT-Mf-z35"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -259,13 +267,13 @@
                         <outlet property="btnSave" destination="GbO-k4-SUW" id="NQW-8k-ASi"/>
                         <outlet property="btnUndo" destination="HHK-ob-Y3L" id="vUM-m2-MS9"/>
                         <outlet property="constraintHeight" destination="mxa-ZU-Wkk" id="wiK-SH-k5A"/>
-                        <outlet property="img" destination="zEz-vl-zoA" id="DLh-CX-ger"/>
+                        <outlet property="imagePicker" destination="zEz-vl-zoA" id="DLh-CX-ger"/>
                         <outlet property="lblDiscount" destination="v7d-UT-0Y2" id="kyh-iy-ktw"/>
-                        <outlet property="pkrType" destination="FPf-Ro-vi2" id="Hjg-ZJ-26D"/>
+                        <outlet property="textDescription" destination="jJD-ZP-DqY" id="NQs-vk-R4Y"/>
+                        <outlet property="textName" destination="DQH-bJ-DgJ" id="Xdh-0h-hkN"/>
                         <outlet property="txtDiscount" destination="BU5-6G-VXw" id="3yH-GH-wg2"/>
                         <outlet property="txtId" destination="EHe-gE-L3c" id="pyQ-Av-sfw"/>
-                        <outlet property="txtName" destination="DQH-bJ-DgJ" id="Xdh-0h-hkN"/>
-                        <outlet property="txtNotes" destination="jJD-ZP-DqY" id="NQs-vk-R4Y"/>
+                        <outlet property="viewPicker" destination="FPf-Ro-vi2" id="Hjg-ZJ-26D"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pFb-5P-Eiz" userLabel="First Responder" sceneMemberID="firstResponder"/>

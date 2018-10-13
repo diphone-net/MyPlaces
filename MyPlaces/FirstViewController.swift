@@ -38,9 +38,9 @@ class FirstViewController: UITableViewController {
         // he creat un segon segue per fer un show detail (no se si es correcte, pero provo)
         // aixi si es clica al boto 'add' ho faig com es feia al video pero si es consulta dono la opció a tornar show VS show detail
         //let dc:DetailController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailController") as! DetailController
-        let place: Place = m_provider.GetItemAt(position: indexPath[1])
         //dc.place = place
         //present(dc, animated: true, completion: nil)
+        let place: Place = m_provider.GetItemAt(position: indexPath.row)
         performSegue(withIdentifier: "show", sender: place)
     }
     

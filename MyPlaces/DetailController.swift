@@ -76,6 +76,8 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
     }
     
     private func fillData(){
+        assert(place != nil,"Realizando fillData sin place!")
+        
         textName.text = place!.name
         textDescription.text = place!.description
         txtId.text = place!.id

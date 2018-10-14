@@ -11,7 +11,7 @@ import MapKit
 
 class Place{
 
-    enum PlacesTypes{
+    enum PlacesTypes: Int{
         case GenericPlace
         case TouristicPlace
     }

@@ -137,9 +137,9 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GbO-k4-SUW">
                                                 <rect key="frame" x="191.5" y="518" width="78" height="30"/>
                                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <state key="normal" title="Save"/>
+                                                <state key="normal" title="Update"/>
                                                 <connections>
-                                                    <action selector="btnSave:" destination="6hV-JK-xMm" eventType="touchUpInside" id="OZh-vf-y69"/>
+                                                    <action selector="btnUpdate:" destination="6hV-JK-xMm" eventType="touchUpInside" id="OZh-vf-y69"/>
                                                 </connections>
                                             </button>
                                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FPf-Ro-vi2">
@@ -171,6 +171,14 @@
                                                     <action selector="btnRemove:" destination="6hV-JK-xMm" eventType="touchUpInside" id="fet-eL-kTd"/>
                                                 </connections>
                                             </button>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fRR-rV-Q8u">
+                                                <rect key="frame" x="85" y="554" width="89" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="Select Image"/>
+                                                <connections>
+                                                    <action selector="btnSelectImage:" destination="6hV-JK-xMm" eventType="touchUpInside" id="MdT-Mf-z35"/>
+                                                </connections>
+                                            </button>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="jJD-ZP-DqY">
                                                 <rect key="frame" x="135" y="374" width="220" height="60"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -181,14 +189,6 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fRR-rV-Q8u">
-                                                <rect key="frame" x="85" y="554" width="89" height="30"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" title="Select Image"/>
-                                                <connections>
-                                                    <action selector="btnSelectImage:" destination="6hV-JK-xMm" eventType="touchUpInside" id="MdT-Mf-z35"/>
-                                                </connections>
-                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -264,15 +264,15 @@
                     <connections>
                         <outlet property="btnRandom" destination="zpi-pv-qyW" id="gFA-pr-rT3"/>
                         <outlet property="btnRemove" destination="NSD-Xm-km2" id="nL1-Ah-T9s"/>
-                        <outlet property="btnSave" destination="GbO-k4-SUW" id="NQW-8k-ASi"/>
                         <outlet property="btnUndo" destination="HHK-ob-Y3L" id="vUM-m2-MS9"/>
+                        <outlet property="btnUpdate" destination="GbO-k4-SUW" id="NQW-8k-ASi"/>
                         <outlet property="constraintHeight" destination="mxa-ZU-Wkk" id="wiK-SH-k5A"/>
                         <outlet property="imagePicked" destination="zEz-vl-zoA" id="DLh-CX-ger"/>
                         <outlet property="lblDiscount" destination="v7d-UT-0Y2" id="kyh-iy-ktw"/>
                         <outlet property="scrollView" destination="BA6-XK-SDf" id="cJX-kx-OVH"/>
                         <outlet property="textDescription" destination="jJD-ZP-DqY" id="NQs-vk-R4Y"/>
+                        <outlet property="textDiscount" destination="BU5-6G-VXw" id="iZu-eW-7nV"/>
                         <outlet property="textName" destination="DQH-bJ-DgJ" id="Xdh-0h-hkN"/>
-                        <outlet property="txtDiscount" destination="BU5-6G-VXw" id="3yH-GH-wg2"/>
                         <outlet property="txtId" destination="EHe-gE-L3c" id="pyQ-Av-sfw"/>
                         <outlet property="viewPicker" destination="FPf-Ro-vi2" id="Hjg-ZJ-26D"/>
                     </connections>

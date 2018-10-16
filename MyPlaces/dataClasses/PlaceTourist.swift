@@ -10,7 +10,16 @@ import Foundation
 
 class PlaceTourist: Place{
     
-    var discount_tourist = ""
+    var discount_tourist = "" {
+        didSet{
+            let testNumber = Int(discount_tourist)
+            if (testNumber == nil || (testNumber != nil && (testNumber! > 100 || testNumber! < 0))) {
+                discount_tourist = "0"
+            } else {
+                discount_tourist = String(testNumber!)
+            }
+        }
+    }
     
     override init(){
         super.init()

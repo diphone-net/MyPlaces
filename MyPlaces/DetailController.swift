@@ -12,19 +12,19 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
     @IBOutlet weak var constraintHeight: NSLayoutConstraint!
     
     @IBOutlet weak var txtId: UITextField!
-    @IBOutlet weak var txtDiscount: UITextField!
     @IBOutlet weak var lblDiscount: UILabel!
     
     @IBOutlet weak var btnUndo: UIButton!
     @IBOutlet weak var btnRandom: UIButton!
-    @IBOutlet weak var btnSave: UIButton!
+    @IBOutlet weak var btnUpdate: UIButton!
     @IBOutlet weak var btnRemove: UIButton!
     
     @IBOutlet weak var textName: UITextField!
     @IBOutlet weak var textDescription: UITextView!
     @IBOutlet weak var viewPicker: UIPickerView!
     @IBOutlet weak var imagePicked: UIImageView!
-
+    @IBOutlet weak var textDiscount: UITextField!
+    
     @IBOutlet weak var scrollView: UIScrollView!
     
     var keyboardHeigh: CGFloat!
@@ -62,7 +62,7 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        showTuristicMode(isTuristic: row == 1)
+        updateTuristicMode()
     }
     
     // MARK Requerit pels controls de posicionament i mostrar teclat
@@ -100,14 +100,28 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
             let keyboardScreenEndFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
             let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
             keyboardHeigh = keyboardViewEndFrame.size.height
-            let distanceToBottom = self.scrollView.frame.size.height - (activeField?.frame.origin.y)! - (activeField?.frame.size.height)!
-            let collapseSpace = keyboardHeigh - distanceToBottom
-            if (collapseSpace > 0){
-                self.scrollView.setContentOffset(CGPoint(x: self.lastOffset.x, y:collapseSpace + 10), animated: false)
-                self.constraintHeight.constant += self.keyboardHeigh
-            }else{
-                keyboardHeigh = nil
-            }
+            moveScrollView()
+        }
+    }
+    
+    /*
+     pinta(desde: #function)
+    func pinta(desde functionname: String){
+        print("Time: \(NSDate()), Function: \(functionname) ")
+            //, line: \(#line) )
+            //NameDelegate: \(textName.delegate!.hash) DescripcionDelegate: \(textDescription.delegate!.hash)")
+        print("Alcada self: \(self.constraintHeight.constant) Alcada scroll: \(self.scrollView.frame.size.height)")
+    }
+    */
+    
+    func moveScrollView(){
+        let distanceToBottom = self.scrollView.frame.size.height - (activeField?.frame.origin.y)! - (activeField?.frame.size.height)!
+        let collapseSpace = keyboardHeigh - distanceToBottom
+        if (collapseSpace > 0){
+            self.scrollView.setContentOffset(CGPoint(x: self.lastOffset.x, y:collapseSpace + 10), animated: false)
+            self.constraintHeight.constant += self.keyboardHeigh
+        }else{
+            keyboardHeigh = nil
         }
     }
     
@@ -131,23 +145,24 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
         viewPicker.dataSource = self
         textName.delegate = self
         textDescription.delegate = self
+        textDiscount.delegate = self
         
-        self.constraintHeight.constant = 400
+        //self.constraintHeight.constant = 400
         
         // MARK Requerit pels events de teclat
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
         
         let notificationCenter = NotificationCenter.default
-        //notificationCenter.addObserver(self, selector: #selector(hideKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
-        notificationCenter.addObserver(self, selector: #selector(showKeyboard), name: UIResponder.keyboardWillShowNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(hideKeyboard(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(showKeyboard(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         
-        enableEdition(enable: place == nil)
         if (place != nil){
             fillData()
         }else{
-            showTuristicMode(isTuristic: false)
+            btnUpdate.setTitle("New", for: .normal)
         }
+        updateTuristicMode()
     }
     
     private func fillData(){
@@ -157,12 +172,11 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
         textDescription.text = place!.description
         txtId.text = place!.id
         viewPicker.selectRow(place!.type.rawValue, inComponent: 0, animated: true)
-        showTuristicMode(isTuristic: false)
         if (place!.type != PlaceTourist.PlacesTypes.GenericPlace){
             let touristPlace = place as! PlaceTourist
-            txtDiscount.text = touristPlace.discount_tourist
-            showTuristicMode(isTuristic: true)
+            textDiscount.text = touristPlace.discount_tourist
         }
+        updateTuristicMode()
         
         // TODO segur que aixo es pot fer en 1 linia")
         if (place!.image != nil){
@@ -170,20 +184,10 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
         }
     }
     
-    private func showTuristicMode(isTuristic: Bool){
+    private func updateTuristicMode(){
+        let isTuristic = viewPicker.selectedRow(inComponent: 0) == 1
         lblDiscount.isHidden = !isTuristic
-        txtDiscount.isHidden = !isTuristic
-    }
-    
-    private func enableEdition(enable: Bool){
-        textName.isEnabled = enable
-        textDescription.isUserInteractionEnabled = enable
-        viewPicker.isUserInteractionEnabled = enable
-        txtDiscount.isEnabled = enable
-        btnUndo.isHidden = !enable
-        btnRandom.isHidden = !enable
-        btnSave.isHidden = !enable
-        btnRemove.isHidden = enable
+        textDiscount.isHidden = !isTuristic
     }
     
     // MARK Actions dels buttons
@@ -193,7 +197,7 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
         navigationController?.popViewController(animated: true)
     }
     
-    @IBAction func btnSave(_ sender: Any) {
+    @IBAction func btnUpdate(_ sender: Any) {
         if textName.text!.count < 1 || textDescription.text!.count < 1 {
             let alert = UIAlertController(title: "Alerta", message: "Cal omplir tots els camps del Place per guardar-lo", preferredStyle: UIAlertController.Style.alert)
             alert.addAction(UIAlertAction(title: "D'acord", style: UIAlertAction.Style.default, handler: nil))
@@ -201,12 +205,26 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
             return
         }
         
-        if viewPicker.selectedRow(inComponent: 0) == 0 {
-            let place = Place(name: textName.text!, description: textDescription.text!, image_in: imagePicked.image?.pngData())
-            m_provider.append(place)
+        let willBeTuristic = viewPicker.selectedRow(inComponent: 0) != 0
+        if place != nil && ((place is PlaceTourist && !willBeTuristic) || (!(place is PlaceTourist) && willBeTuristic)){
+            // si canvia el tipus, l'elimino i el crearem de nou
+            m_provider.remove(place!)
+            place = nil
+        }
+        if (place == nil){
+            if !willBeTuristic {
+                place = Place(name: textName.text!, description: textDescription.text!, image_in: imagePicked.image?.pngData())
+            }else{
+                place = PlaceTourist(name: textName.text!, description: textDescription.text!, discount_tourist: textDiscount.text!, image_in: imagePicked.image?.pngData())
+            }
+            m_provider.append(place!)
         }else{
-            let tplace = PlaceTourist(name: textName.text!, description: textDescription.text!, discount_tourist: txtDiscount.text!, image_in: imagePicked.image?.pngData())
-            m_provider.append(tplace)	
+            place!.name = textName.text!
+            place!.description = textDescription.text!
+            place!.image = imagePicked.image?.pngData()
+            if (place is PlaceTourist){
+                (place as! PlaceTourist).discount_tourist = textDiscount.text!
+            }
         }
         btnBack(sender)
     }
@@ -220,6 +238,7 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
     }
     
     @IBAction func btnBack(_ sender: Any) {
+        navigationController?.popViewController(animated: true)
         dismiss(animated: true, completion: nil)
     }
     
@@ -232,13 +251,12 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
         textName.text = texts[rand]
         rand = Int(arc4random_uniform(UInt32(descripcions.count)))
         textDescription.text = descripcions[rand]
+        viewPicker.selectRow(Int(arc4random_uniform(2)) , inComponent: 0, animated: true)
         if (Int(arc4random_uniform(2)) == 1){
             rand = Int(arc4random_uniform(100))
-            txtDiscount.text = String(rand)
-            showTuristicMode(isTuristic: true)
-        }else{
-            showTuristicMode(isTuristic: false)
+            textDiscount.text = String(rand)
         }
+        updateTuristicMode()
         
         rand = Int(arc4random_uniform(UInt32(imgs.count)))
         imagePicked.image = UIImage(named:imgs[rand])

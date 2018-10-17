@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let img1 = UIImage(named: "sun.png")
         let img2 = UIImage(named: "moon.jpg")
         
-        let manager = ManagerPlaces.share()
+        let manager = ManagerPlaces.shared()
         let place1 = Place(name: "Plaça", description: "La meva plaça", image_in: img1?.pngData())
         manager.append(place1)
         let place2 = Place(name: "carrer", description: "on vaig néixer", image_in: img2?.pngData())

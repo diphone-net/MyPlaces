@@ -13,6 +13,7 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
     
     @IBOutlet weak var txtId: UITextField!
     @IBOutlet weak var lblDiscount: UILabel!
+    @IBOutlet weak var txtUbicacion: UITextField!
     
     @IBOutlet weak var btnUndo: UIButton!
     @IBOutlet weak var btnRandom: UIButton!
@@ -31,10 +32,10 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
     var activeField: UIView!
     var lastOffset: CGPoint! // canviat de CGFloat
     let pickerElems1 = ["Generic place","Touristic place"]
-    var m_provider = ManagerPlaces.share()
+    var m_provider = ManagerPlaces.shared()
     var place: Place?
     
-    // MARK Codi requerit pel picker
+    // MARK: Codi requerit pel picker
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1 //num de columnes
     }
@@ -65,7 +66,7 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
         updateTuristicMode()
     }
     
-    // MARK Requerit pels controls de posicionament i mostrar teclat
+    // MARK: Requerit pels controls de posicionament i mostrar teclat
     @objc func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
         activeField = textView
         lastOffset = self.scrollView.contentOffset
@@ -136,7 +137,9 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
         }
         keyboardHeigh = nil
     }
-        
+    
+    // MARK: Inici del Controller en si
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -147,9 +150,11 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
         textDescription.delegate = self
         textDiscount.delegate = self
         
-        //self.constraintHeight.constant = 400
+        // volia posar l'alçada en funció del botó inferior però no sé com va
+        self.constraintHeight.constant = 50
+        //self.constraintHeight.constant = self.btnUndo.frame.origin.y + self.btnUndo.frame.size.height + 10
         
-        // MARK Requerit pels events de teclat
+        //Requerit pels events de teclat
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
         
@@ -171,6 +176,14 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
         textName.text = place!.name
         textDescription.text = place!.description
         txtId.text = place!.id
+        
+        // temporal per veure que es graba bé
+        if (place!.location != nil) {
+            let lat : NSNumber = NSNumber(value: place!.location.latitude)
+            let lng : NSNumber = NSNumber(value: place!.location.longitude)
+            txtUbicacion.text = "lat:\(lat) lon:\(lng)"
+        }
+        
         viewPicker.selectRow(place!.type.rawValue, inComponent: 0, animated: true)
         if (place!.type != PlaceTourist.PlacesTypes.GenericPlace){
             let touristPlace = place as! PlaceTourist
@@ -190,42 +203,65 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
         textDiscount.isHidden = !isTuristic
     }
     
-    // MARK Actions dels buttons
+    // MARK: Actions dels buttons
     @IBAction func btnRemove(_ sender: Any) {
-        // el boton solo es visible cuando place tiene valor
-        m_provider.remove(place!)
-        navigationController?.popViewController(animated: true)
+        if place != nil {
+            m_provider.remove(place!)
+            m_provider.updateObservers()
+        }
+        btnBack(sender)
     }
     
     @IBAction func btnUpdate(_ sender: Any) {
+        var FaltenDades = ""
+        
         if textName.text!.count < 1 || textDescription.text!.count < 1 {
-            let alert = UIAlertController(title: "Alerta", message: "Cal omplir tots els camps del Place per guardar-lo", preferredStyle: UIAlertController.Style.alert)
+            FaltenDades = "Cal omplir tots els camps del Place per guardar-lo."
+        }
+        if imagePicked.image == nil {
+            if FaltenDades != "" {
+                FaltenDades += "\n"
+            }
+            FaltenDades += "No s'ha sel·leccionat cap imatge."
+        }
+        if FaltenDades != "" {
+            let alert = UIAlertController(title: "Error", message: FaltenDades , preferredStyle: UIAlertController.Style.alert)
             alert.addAction(UIAlertAction(title: "D'acord", style: UIAlertAction.Style.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
             return
         }
         
+        // temporal, es farà més endavant la implementacio correcta
+        #warning ("implementar canvi de tipus")
         let willBeTuristic = viewPicker.selectedRow(inComponent: 0) != 0
         if place != nil && ((place is PlaceTourist && !willBeTuristic) || (!(place is PlaceTourist) && willBeTuristic)){
             // si canvia el tipus, l'elimino i el crearem de nou
             m_provider.remove(place!)
             place = nil
         }
+        
+        let imageData = imagePicked.image!.jpegData(compressionQuality: 1.0)
         if (place == nil){
+            // New
             if !willBeTuristic {
-                place = Place(name: textName.text!, description: textDescription.text!, image_in: imagePicked.image?.pngData())
+                place = Place(name: textName.text!, description: textDescription.text!, image_in: imageData)
             }else{
-                place = PlaceTourist(name: textName.text!, description: textDescription.text!, discount_tourist: textDiscount.text!, image_in: imagePicked.image?.pngData())
+                place = PlaceTourist(name: textName.text!, description: textDescription.text!, discount_tourist: textDiscount.text!, image_in: imageData)
             }
             m_provider.append(place!)
         }else{
+            // Update
             place!.name = textName.text!
             place!.description = textDescription.text!
-            place!.image = imagePicked.image?.pngData()
+            // l'exercici 4 diu que no es faci però està tant a mà que ho faig
+            place!.image = imageData
             if (place is PlaceTourist){
                 (place as! PlaceTourist).discount_tourist = textDiscount.text!
             }
         }
+        place!.location = ManagerLocation.GetLocation()
+        m_provider.updateObservers()
+        
         btnBack(sender)
     }
     

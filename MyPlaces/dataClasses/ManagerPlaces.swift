@@ -8,9 +8,27 @@
 
 import Foundation
 
+protocol ManagerPlacesObserver {
+    func onPlacesChange()
+}
+
 class ManagerPlaces{
     var places = [Place]()
-
+    var m_observer = Array<ManagerPlacesObserver>()
+    
+    func addOberserver(object: ManagerPlacesObserver){
+        m_observer.append(object)
+    }
+    
+    func updateObservers(){
+        /*for observer in m_observer {
+            observer.onPlacesChange()
+        }*/
+        m_observer.forEach{ observer in
+           observer.onPlacesChange()
+        }
+    }
+    
     func append(_ value: Place){
         places.append(value)
     }
@@ -39,7 +57,7 @@ class ManagerPlaces{
         return ManagerPlaces()
     }()
     
-    class func share() -> ManagerPlaces{
+    class func shared() -> ManagerPlaces{
         return singletonManage
     }
 }

@@ -8,18 +8,27 @@
 
 import UIKit
 
-class FirstViewController: UITableViewController {
+class FirstViewController: UITableViewController, ManagerPlacesObserver {
 
-    let m_provider = ManagerPlaces.share()
+    let m_provider = ManagerPlaces.shared()
+    
+    func onPlacesChange() {
+        let view: UITableView = (self.view as? UITableView)!
+        view.reloadData()
+    }
     
     // nou pel retorn despres d'afegir n elemnt
     override func viewWillAppear(_ animated: Bool) {
-        self.tableView.reloadData()
+        //self.tableView.reloadData()
+        // ja no cal perquè es controla per l'observer
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // prova
+        
+        // añadimos el controller como observer
+        ManagerPlaces.shared().addOberserver(object: self)
+        
         // Do any additional setup after loading the view, typically from a nib.
     }
     

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		34605616217794C400318158 /* ManagerLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34605615217794C400318158 /* ManagerLocation.swift */; };
+		3460561821785A0100318158 /* FileSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3460561721785A0100318158 /* FileSystem.swift */; };
 		8A0D9CE9215E731800854E72 /* yoga.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8A0D9CE5215E731700854E72 /* yoga.jpg */; };
 		8A0D9CEA215E731800854E72 /* ball.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8A0D9CE6215E731700854E72 /* ball.jpg */; };
 		8A0D9CEB215E731800854E72 /* moon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8A0D9CE7215E731700854E72 /* moon.jpg */; };
@@ -28,6 +29,7 @@
 
 /* Begin PBXFileReference section */
 		34605615217794C400318158 /* ManagerLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagerLocation.swift; sourceTree = "<group>"; };
+		3460561721785A0100318158 /* FileSystem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileSystem.swift; sourceTree = "<group>"; };
 		8A0D9CE5215E731700854E72 /* yoga.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = yoga.jpg; sourceTree = "<group>"; };
 		8A0D9CE6215E731700854E72 /* ball.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ball.jpg; sourceTree = "<group>"; };
 		8A0D9CE7215E731700854E72 /* moon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = moon.jpg; sourceTree = "<group>"; };
@@ -82,12 +84,13 @@
 			children = (
 				8A94E4D9215AAA1600D958B1 /* img */,
 				8A89501C215A76A50037193E /* dataClasses */,
+				8A0FE68F215A03800085C110 /* Main.storyboard */,
 				8A0FE689215A03800085C110 /* AppDelegate.swift */,
 				8A0FE68B215A03800085C110 /* FirstViewController.swift */,
 				8A0FE68D215A03800085C110 /* SecondViewController.swift */,
-				34605615217794C400318158 /* ManagerLocation.swift */,
-				8A0FE68F215A03800085C110 /* Main.storyboard */,
 				8A0FE69D215A08B50085C110 /* DetailController.swift */,
+				34605615217794C400318158 /* ManagerLocation.swift */,
+				3460561721785A0100318158 /* FileSystem.swift */,
 				8A0FE692215A03820085C110 /* Assets.xcassets */,
 				8A0FE694215A03820085C110 /* LaunchScreen.storyboard */,
 				8A0FE697215A03820085C110 /* Info.plist */,
@@ -207,6 +210,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8A89501E215A76CE0037193E /* PlaceTourist.swift in Sources */,
+				3460561821785A0100318158 /* FileSystem.swift in Sources */,
 				8A0FE69E215A08B50085C110 /* DetailController.swift in Sources */,
 				8A0FE68E215A03800085C110 /* SecondViewController.swift in Sources */,
 				8A0FE68A215A03800085C110 /* AppDelegate.swift in Sources */,

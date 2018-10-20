@@ -207,12 +207,13 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
     @IBAction func btnRemove(_ sender: Any) {
         if place != nil {
             m_provider.remove(place!)
+            m_provider.store()
             m_provider.updateObservers()
         }
         btnBack(sender)
     }
     
-    @IBAction func btnUpdate(_ sender: Any) {
+    @IBAction func btnUpdateNew(_ sender: Any) {
         var FaltenDades = ""
         
         if textName.text!.count < 1 || textDescription.text!.count < 1 {
@@ -260,6 +261,7 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
             }
         }
         place!.location = ManagerLocation.GetLocation()
+        m_provider.store()
         m_provider.updateObservers()
         
         btnBack(sender)

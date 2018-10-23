@@ -150,6 +150,9 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
         textDescription.delegate = self
         textDiscount.delegate = self
         
+        // teclat numèric per defecte pel discount
+        textDiscount.keyboardType = UIKeyboardType.numberPad
+        
         // volia posar l'alçada en funció del botó inferior però no sé com va
         self.constraintHeight.constant = 50
         //self.constraintHeight.constant = self.btnUndo.frame.origin.y + self.btnUndo.frame.size.height + 10
@@ -278,26 +281,6 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
     @IBAction func btnBack(_ sender: Any) {
         navigationController?.popViewController(animated: true)
         dismiss(animated: true, completion: nil)
-    }
-    
-    @IBAction func btnRandomTemporal(_ sender: Any) {
-        let texts = ["Plaça", "Museu", "Carrer", "Botiga", "Lloc indeterminat"]
-        let descripcions = ["blava del cel blau", "de les arts", "angel suprem", "groc pàlid", "maravellós"]
-        let imgs = ["ball.jpg", "ghost.png", "yoga.jpg"]
-        
-        var rand = Int(arc4random_uniform(UInt32(texts.count)))
-        textName.text = texts[rand]
-        rand = Int(arc4random_uniform(UInt32(descripcions.count)))
-        textDescription.text = descripcions[rand]
-        viewPicker.selectRow(Int(arc4random_uniform(2)) , inComponent: 0, animated: true)
-        if (Int(arc4random_uniform(2)) == 1){
-            rand = Int(arc4random_uniform(100))
-            textDiscount.text = String(rand)
-        }
-        updateTuristicMode()
-        
-        rand = Int(arc4random_uniform(UInt32(imgs.count)))
-        imagePicked.image = UIImage(named:imgs[rand])
     }
     
     /*

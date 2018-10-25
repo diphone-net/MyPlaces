@@ -15,22 +15,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        
-        //let img1 = UIImage(named: "sun.png")
-        //let img2 = UIImage(named: "moon.jpg")
-        
-        let manager = ManagerPlaces.shared()
-        //let place1 = Place(name: "Plaça", description: "La meva plaça", image_in: img1?.pngData())
-        //manager.append(place1)
-        //let place2 = Place(name: "carrer", description: "on vaig néixer", image_in: img2?.pngData())
-        //manager.append(place2)
-        //let place3 = PlaceTourist(name: "Museu", description: "Cosmocaixa", discount_tourist: "30", image_in: img1?.pngData())
-        //manager.append(place3)
-        //let place4 = PlaceTourist(name: "Museu", description: "de la Pell", discount_tourist: "10", image_in: img2?.pngData())
-        //manager.append(place4)
-        
-        //let placetmp = manager.GetItemById(id: "falseID")
-        
         return true
     }
 

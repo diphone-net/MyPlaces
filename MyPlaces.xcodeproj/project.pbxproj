@@ -9,10 +9,6 @@
 /* Begin PBXBuildFile section */
 		34605616217794C400318158 /* ManagerLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34605615217794C400318158 /* ManagerLocation.swift */; };
 		3460561821785A0100318158 /* FileSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3460561721785A0100318158 /* FileSystem.swift */; };
-		8A0D9CE9215E731800854E72 /* yoga.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8A0D9CE5215E731700854E72 /* yoga.jpg */; };
-		8A0D9CEA215E731800854E72 /* ball.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8A0D9CE6215E731700854E72 /* ball.jpg */; };
-		8A0D9CEB215E731800854E72 /* moon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8A0D9CE7215E731700854E72 /* moon.jpg */; };
-		8A0D9CEC215E731800854E72 /* ghost.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A0D9CE8215E731800854E72 /* ghost.png */; };
 		8A0FE68A215A03800085C110 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0FE689215A03800085C110 /* AppDelegate.swift */; };
 		8A0FE68C215A03800085C110 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0FE68B215A03800085C110 /* FirstViewController.swift */; };
 		8A0FE68E215A03800085C110 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0FE68D215A03800085C110 /* SecondViewController.swift */; };
@@ -24,16 +20,11 @@
 		8A89501B215A74E90037193E /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A89501A215A74E90037193E /* Place.swift */; };
 		8A89501E215A76CE0037193E /* PlaceTourist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A89501D215A76CE0037193E /* PlaceTourist.swift */; };
 		8A895020215A7BD80037193E /* ManagerPlaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A89501F215A7BD80037193E /* ManagerPlaces.swift */; };
-		8A94E4DD215AAA8A00D958B1 /* sun.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A94E4DC215AAA8A00D958B1 /* sun.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		34605615217794C400318158 /* ManagerLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagerLocation.swift; sourceTree = "<group>"; };
 		3460561721785A0100318158 /* FileSystem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileSystem.swift; sourceTree = "<group>"; };
-		8A0D9CE5215E731700854E72 /* yoga.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = yoga.jpg; sourceTree = "<group>"; };
-		8A0D9CE6215E731700854E72 /* ball.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ball.jpg; sourceTree = "<group>"; };
-		8A0D9CE7215E731700854E72 /* moon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = moon.jpg; sourceTree = "<group>"; };
-		8A0D9CE8215E731800854E72 /* ghost.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ghost.png; sourceTree = "<group>"; };
 		8A0FE686215A03800085C110 /* MyPlaces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyPlaces.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A0FE689215A03800085C110 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8A0FE68B215A03800085C110 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -47,7 +38,6 @@
 		8A89501A215A74E90037193E /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
 		8A89501D215A76CE0037193E /* PlaceTourist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceTourist.swift; sourceTree = "<group>"; };
 		8A89501F215A7BD80037193E /* ManagerPlaces.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerPlaces.swift; sourceTree = "<group>"; };
-		8A94E4DC215AAA8A00D958B1 /* sun.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sun.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,7 +72,6 @@
 		8A0FE688215A03800085C110 /* MyPlaces */ = {
 			isa = PBXGroup;
 			children = (
-				8A94E4D9215AAA1600D958B1 /* img */,
 				8A89501C215A76A50037193E /* dataClasses */,
 				8A0FE68F215A03800085C110 /* Main.storyboard */,
 				8A0FE689215A03800085C110 /* AppDelegate.swift */,
@@ -114,18 +103,6 @@
 				8A89501F215A7BD80037193E /* ManagerPlaces.swift */,
 			);
 			path = dataClasses;
-			sourceTree = "<group>";
-		};
-		8A94E4D9215AAA1600D958B1 /* img */ = {
-			isa = PBXGroup;
-			children = (
-				8A0D9CE6215E731700854E72 /* ball.jpg */,
-				8A0D9CE8215E731800854E72 /* ghost.png */,
-				8A0D9CE7215E731700854E72 /* moon.jpg */,
-				8A0D9CE5215E731700854E72 /* yoga.jpg */,
-				8A94E4DC215AAA8A00D958B1 /* sun.png */,
-			);
-			path = img;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -192,12 +169,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8A0FE696215A03820085C110 /* LaunchScreen.storyboard in Resources */,
-				8A0D9CEC215E731800854E72 /* ghost.png in Resources */,
-				8A0D9CE9215E731800854E72 /* yoga.jpg in Resources */,
-				8A0D9CEB215E731800854E72 /* moon.jpg in Resources */,
-				8A94E4DD215AAA8A00D958B1 /* sun.png in Resources */,
 				8A0FE693215A03820085C110 /* Assets.xcassets in Resources */,
-				8A0D9CEA215E731800854E72 /* ball.jpg in Resources */,
 				8A0FE691215A03800085C110 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

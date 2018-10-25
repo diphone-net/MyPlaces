@@ -210,8 +210,7 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
     @IBAction func btnRemove(_ sender: Any) {
         if place != nil {
             m_provider.remove(place!)
-            m_provider.store()
-            m_provider.updateObservers()
+            m_provider.updateObserversAndStore()
         }
         btnBack(sender)
     }
@@ -264,8 +263,7 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
             }
         }
         place!.location = ManagerLocation.GetLocation()
-        m_provider.store()
-        m_provider.updateObservers()
+        m_provider.updateObserversAndStore()
         
         btnBack(sender)
     }

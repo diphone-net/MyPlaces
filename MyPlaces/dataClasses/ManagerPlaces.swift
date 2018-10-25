@@ -102,10 +102,8 @@ class ManagerPlaces: Codable {
         m_observer.append(object)
     }
     
-    func updateObservers(){
-        /*for observer in m_observer {
-            observer.onPlacesChange()
-        }*/
+    func updateObserversAndStore(){
+        self.store()
         m_observer.forEach{ observer in
            observer.onPlacesChange()
         }

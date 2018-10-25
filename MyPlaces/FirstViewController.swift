@@ -96,6 +96,7 @@ class FirstViewController: UITableViewController, ManagerPlacesObserver {
             let imageIcon: UIImageView = UIImageView(image: UIImage(data: place.image!))
             let mida: CGFloat = 50
             imageIcon.frame = CGRect(x:wt - mida - 10, y:40, width:mida, height:mida)
+            imageIcon.contentMode = UIView.ContentMode.scaleAspectFit
             cell.contentView.addSubview(imageIcon)
         }
         return cell

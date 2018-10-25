@@ -149,7 +149,7 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zEz-vl-zoA">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zEz-vl-zoA">
                                                 <rect key="frame" x="135" y="126" width="220" height="220"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="zEz-vl-zoA" secondAttribute="height" multiplier="1:1" id="2Y8-TR-su7"/>

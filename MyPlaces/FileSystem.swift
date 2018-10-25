@@ -36,6 +36,7 @@ class FileSystem
     class func Read() -> String
     {
         var data:String = ""
+        print("Llegint d'aquí: \(GetPath())")
         do {
              data = try String(contentsOf: GetPath(), encoding: .utf8)
         }
@@ -46,6 +47,7 @@ class FileSystem
         return data
     }
     
+    // implementació temporal fins veure com s'implementa a la pla3
     class func ReadData(id: String) -> Data?{
         let path = GetPathBase() + "/" + id
         var data:Data?
@@ -66,7 +68,6 @@ class FileSystem
         
     }
     
-    // implementació temporal fins veure com s'implementa a la pla3
     class func WriteData(id:String,image:Data)
     {
         do {
@@ -80,6 +81,7 @@ class FileSystem
     class func Write(data:String)
     {
         //print ("Guardant això: \(data)")
+        print ("Guardant aquí: \(GetPath())")
         do {
             try data.write(to: GetPath(), atomically: false, encoding: .utf8)
         }

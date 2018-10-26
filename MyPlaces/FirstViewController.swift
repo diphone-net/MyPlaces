@@ -92,13 +92,14 @@ class FirstViewController: UITableViewController, ManagerPlacesObserver {
                 cell.contentView.addSubview(label)
             }
         }
-        if (place.image != nil){
-            let imageIcon: UIImageView = UIImageView(image: UIImage(data: place.image!))
-            let mida: CGFloat = 50
-            imageIcon.frame = CGRect(x:wt - mida - 10, y:40, width:mida, height:mida)
-            imageIcon.contentMode = UIView.ContentMode.scaleAspectFit
-            cell.contentView.addSubview(imageIcon)
-        }
+        
+        // de moment no es permet Place sense imatge
+        let imageIcon: UIImageView = UIImageView(image: UIImage(contentsOfFile: m_provider.GetPathImage(of: place)))
+        let mida: CGFloat = 50
+        imageIcon.frame = CGRect(x:wt - mida - 10, y:40, width:mida, height:mida)
+        imageIcon.contentMode = UIView.ContentMode.scaleAspectFit
+        cell.contentView.addSubview(imageIcon)
+
         return cell
     }
     

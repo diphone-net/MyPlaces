@@ -80,8 +80,8 @@ class FileSystem
 
     class func Write(data:String)
     {
-        //print ("Guardant això: \(data)")
         print ("Guardant aquí: \(GetPath())")
+        print ("Guardant això: \(data)")
         do {
             try data.write(to: GetPath(), atomically: false, encoding: .utf8)
         }

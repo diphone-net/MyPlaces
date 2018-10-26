@@ -11,12 +11,11 @@ import UIKit
 class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate, UITextFieldDelegate{
     @IBOutlet weak var constraintHeight: NSLayoutConstraint!
     
-    @IBOutlet weak var txtId: UITextField!
     @IBOutlet weak var lblDiscount: UILabel!
-    @IBOutlet weak var txtUbicacion: UITextField!
+    @IBOutlet weak var lblId: UILabel!
+    @IBOutlet weak var lblUbicacion: UILabel!
     
     @IBOutlet weak var btnUndo: UIButton!
-    @IBOutlet weak var btnRandom: UIButton!
     @IBOutlet weak var btnUpdate: UIButton!
     @IBOutlet weak var btnRemove: UIButton!
     
@@ -48,15 +47,20 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
         return pickerElems1[row]
     }
     
-    //func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]){
+
+    //func imagePickerController(_: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]){
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        // Dona el seguent error però em comentat que l'ignorem
+        // [discovery] errors encountered while discovering extensions: Error Domain=PlugInKit Code=13 "query cancelled" UserInfo={NSLocalizedDescription=query cancelled}
+        
+        //print(UIImagePickerController.isSourceTypeAvailable(.photoLibrary))
         view.endEditing(true)
-        //let image = info[UIImagePickerControllerOriginalImage] as! UIImage
         let image = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
         imagePicked.contentMode = .scaleAspectFit
         imagePicked.image = image
         dismiss(animated: true, completion: nil)
     }
+    
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController){
         dismiss(animated: true, completion: nil)
@@ -178,13 +182,13 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
         
         textName.text = place!.name
         textDescription.text = place!.description
-        txtId.text = place!.id
+        lblId.text = "ID: \(place!.id)"
         
         // temporal per veure que es graba bé
         if (place!.location != nil) {
             let lat : NSNumber = NSNumber(value: place!.location.latitude)
             let lng : NSNumber = NSNumber(value: place!.location.longitude)
-            txtUbicacion.text = "lat:\(lat) lon:\(lng)"
+            lblUbicacion.text = "Position: lat:\(lat) lon:\(lng)"
         }
         
         viewPicker.selectRow(place!.type.rawValue, inComponent: 0, animated: true)
@@ -194,10 +198,7 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
         }
         updateTuristicMode()
         
-        // TODO segur que aixo es pot fer en 1 linia")
-        if (place!.image != nil){
-            imagePicked.image = UIImage(data: place!.image!)
-        }
+        imagePicked.image = UIImage(contentsOfFile: m_provider.GetPathImage(of: place!))
     }
     
     private func updateTuristicMode(){

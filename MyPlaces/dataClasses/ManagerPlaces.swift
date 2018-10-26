@@ -70,10 +70,7 @@ class ManagerPlaces: Codable {
                 let data: Data = Data(data_str.utf8)
                 resul = try decoder.decode(ManagerPlaces.self, from: data)
                 
-                // carreguem les imatges
-                for place in resul!.places{
-                    place.image = FileSystem.ReadData(id: place.id)
-                }
+                // les imatges es carreguen sota demanda des dels controllers
             }
             catch{
                 resul = nil
@@ -89,6 +86,7 @@ class ManagerPlaces: Codable {
             for place in places {
                 if (place.image != nil){
                     FileSystem.WriteData(id: place.id, image: place.image!)
+                    place.image = nil
                 }
             }
             FileSystem.Write(data: String(data: data, encoding: .utf8)!)
@@ -134,7 +132,6 @@ class ManagerPlaces: Codable {
     }
     
     func GetPathImage(of place: Place) -> String{
-        #warning("No es fa servir temporalment, serà pla3?")
         return FileSystem.GetPathImage(id: place.id)
     }
     

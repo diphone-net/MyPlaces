@@ -135,6 +135,16 @@ class ManagerPlaces: Codable {
         return FileSystem.GetPathImage(id: place.id)
     }
     
+    // retorna true si hi ha un place diferent a apartFrom amb el mateix nom
+    func ExistPlaceLike(name placeName: String, apartFrom exceptionPlace: Place?) -> Bool{
+        for place in places{
+            if place.name == placeName {
+                if (exceptionPlace == nil || (exceptionPlace != nil && exceptionPlace!.id != place.id)) {return true}
+            }
+        }
+        return false
+    }
+    
     //MARK: Singleton
     private static var sharedManagerPlaces: ManagerPlaces = {
         // intentem carregar el Manager i si ho aconseguim, el retornem

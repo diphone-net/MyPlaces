@@ -215,26 +215,52 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
         }
         btnBack(sender)
     }
-    
-    @IBAction func btnUpdateNew(_ sender: Any) {
-        var FaltenDades = ""
+
+    // controls bàsics per guardar un place
+    private func checkDataIsOk() -> ([String],[String]) {
+        var errors = [String]()
+        var warnings = [String]()
         
-        if textName.text!.count < 1 || textDescription.text!.count < 1 {
-            FaltenDades = "Cal omplir tots els camps del Place per guardar-lo."
+        if textName.text!.count < 1 {
+            errors.append("El camp 'Nom' està buit")
+
+        }
+        if textDescription.text!.count < 1 {
+            errors.append("El camp 'Notes' està buit")
         }
         if imagePicked.image == nil {
-            if FaltenDades != "" {
-                FaltenDades += "\n"
-            }
-            FaltenDades += "No s'ha sel·leccionat cap imatge."
+            errors.append("No s'ha sel·leccionat cap imatge")
         }
-        if FaltenDades != "" {
-            let alert = UIAlertController(title: "Error", message: FaltenDades , preferredStyle: UIAlertController.Style.alert)
+        
+        if m_provider.ExistPlaceLike(name: textName.text!, apartFrom: self.place ){
+            warnings.append("Ja existeix un Place amb el nom '\(textName.text!)'")
+        }
+        
+        return (errors,warnings)
+    }
+    
+    @IBAction func btnUpdateNew(_ sender: Any) {
+        let (errors, warnings) = checkDataIsOk()
+        if (errors.count > 0){
+            let errorsAplanats = errors.joined(separator: "\n")
+            let alert = UIAlertController(title: "Error", message: errorsAplanats , preferredStyle: UIAlertController.Style.alert)
             alert.addAction(UIAlertAction(title: "D'acord", style: UIAlertAction.Style.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
             return
         }
-        
+        if (warnings.count>0) {
+            let warningsAplanats = warnings.joined(separator: "\n") + "\n\n Vols continuar?"
+            let warningAlert = UIAlertController(title: "Avís", message: warningsAplanats, preferredStyle: UIAlertController.Style.alert)
+            warningAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in self.actualitzaCrea(sender) }))
+            warningAlert.addAction(UIAlertAction(title: "Cancel·lar", style: .cancel, handler: { (action: UIAlertAction!) in return }))
+            present(warningAlert, animated: true, completion: nil)
+        } else {
+            self.actualitzaCrea(sender)
+        }
+    }
+    
+    // un cop passades les verificacions, crea o actualitza el place
+    private func actualitzaCrea(_ sender: Any){
         // temporal, es farà més endavant la implementacio correcta
         #warning ("implementar canvi de tipus")
         let willBeTuristic = viewPicker.selectedRow(inComponent: 0) != 0

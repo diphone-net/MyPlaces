@@ -73,32 +73,69 @@ class FirstViewController: UITableViewController, ManagerPlacesObserver {
         let fuente: UIFont = UIFont(name: "Arial", size: 12)!
         let fuenteTitulo = UIFont.boldSystemFont(ofSize: 14)
         
+        tableView.rowHeight = UITableView.automaticDimension
+        
+        
         // Add subviews to cell
         // UILabel and UIImageView
         var label: UILabel
-
+        var labelFilaActual: UILabel? = nil
+        var labelFilaAnterior: UILabel? = nil
+        let defaultSpaceX: CGFloat = 20
+        let defaultSpaceY: CGFloat = 15
+        
         let place: Place = m_provider.GetItemAt(position: indexPath[1])
         
         // afegim els elements del place i touristplace
-        for element in 0...3{
+        // for per el Name Descripction i Discount
+        for element in 0...2{
+            // es el label o el contingut
             for i in 0...1{
-                let posY: CGFloat = 5 + CGFloat(element) * 20.0 + CGFloat(i) * 2.0
-                let posX: CGFloat = 5 + CGFloat(i) * 90
-                label = UILabel(frame: CGRect(x:posX,y:posY,width:wt,height:20))
+                label = UILabel()
+                cell.contentView.addSubview(label)
+                
+                // posicionament x
+                label.translatesAutoresizingMaskIntoConstraints = false
+                if (i == 0){
+                    // primera columna
+                    label.leadingAnchor.constraint(greaterThanOrEqualTo: cell.leadingAnchor, constant: defaultSpaceX).isActive = true
+                    label.widthAnchor.constraint(equalToConstant: 80).isActive = true
+                } else {
+                    label.leadingAnchor.constraint(greaterThanOrEqualTo: labelFilaActual!.trailingAnchor, constant: defaultSpaceX).isActive = true
+                    label.trailingAnchor.constraint(greaterThanOrEqualTo: cell.trailingAnchor, constant: defaultSpaceX)
+                }
+                // posicionament y
+                if (element == 0){
+                    // primera fila
+                    label.topAnchor.constraint(greaterThanOrEqualTo: cell.topAnchor, constant: defaultSpaceY).isActive = true
+                } else {
+                    label.topAnchor.constraint(greaterThanOrEqualTo: labelFilaAnterior!.bottomAnchor , constant: 10).isActive = true
+                }
+                if (i==0){
+                    labelFilaActual = label
+                } else {
+                    labelFilaAnterior = label
+                }
+                
                 label.font = (i == 0) ? fuenteTitulo : fuente
                 label.numberOfLines = 1
                 label.text = (i == 0) ? getTitle(of: place, at: element) : getDefinition(of: place, at: element)
                 label.sizeToFit()
-                cell.contentView.addSubview(label)
             }
         }
         
         // de moment no es permet Place sense imatge
         let imageIcon: UIImageView = UIImageView(image: UIImage(contentsOfFile: m_provider.GetPathImage(of: place)))
-        let mida: CGFloat = 50
-        imageIcon.frame = CGRect(x:wt - mida - 10, y:40, width:mida, height:mida)
+        let mida: CGFloat = 60
+        imageIcon.frame = CGRect(x:wt - mida - defaultSpaceX, y:defaultSpaceY, width:mida, height:mida)
         imageIcon.contentMode = UIView.ContentMode.scaleAspectFit
         cell.contentView.addSubview(imageIcon)
+        //imageIcon.translatesAutoresizingMaskIntoConstraints = false
+        //imageIcon.topAnchor.constraint(greaterThanOrEqualTo: cell.topAnchor, constant: defaultSpace).isActive = true
+        //imageIcon.bottomAnchor.constraint(greaterThanOrEqualTo: cell.bottomAnchor, constant: defaultSpace).isActive = true
+        //imageIcon.trailingAnchor.constraint(greaterThanOrEqualTo: cell.trailingAnchor, constant: defaultSpace).isActive = true
+        //imageIcon.widthAnchor.constraint(equalToConstant: 10)
+        //imageIcon.heightAnchor.constraint(equalToConstant: 10)
 
         return cell
     }
@@ -106,15 +143,12 @@ class FirstViewController: UITableViewController, ManagerPlacesObserver {
     private func getDefinition(of place: Place, at element: Int) -> String{
         switch element{
         case 0:
-            return place.id
-        case 1:
             return place.name
-        case 2:
+        case 1:
             return place.description
-        case 3:
-            if (place.type == PlaceTourist.PlacesTypes.TouristicPlace){
-                let touristPlace = place as! PlaceTourist
-                return touristPlace.discount_tourist + "%"
+        case 2:
+            if let pt = (place as? PlaceTourist){
+                return pt.discount_tourist + "%"
             }
             return ""
         default:
@@ -125,12 +159,10 @@ class FirstViewController: UITableViewController, ManagerPlacesObserver {
     private func getTitle(of place: Place, at element: Int) -> String{
         switch element{
         case 0:
-            return "ID"
-        case 1:
             return "Lloc"
-        case 2:
+        case 1:
             return "Descripció"
-        case 3:
+        case 2:
             if (place.type == PlaceTourist.PlacesTypes.TouristicPlace){
                 return "Descompte"
             }

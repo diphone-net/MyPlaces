@@ -47,7 +47,6 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
         return pickerElems1[row]
     }
     
-
     //func imagePickerController(_: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]){
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         // Dona el seguent error però em comentat que l'ignorem
@@ -60,7 +59,6 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
         imagePicked.image = image
         dismiss(animated: true, completion: nil)
     }
-    
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController){
         dismiss(animated: true, completion: nil)
@@ -109,16 +107,6 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
         }
     }
     
-    /*
-     pinta(desde: #function)
-    func pinta(desde functionname: String){
-        print("Time: \(NSDate()), Function: \(functionname) ")
-            //, line: \(#line) )
-            //NameDelegate: \(textName.delegate!.hash) DescripcionDelegate: \(textDescription.delegate!.hash)")
-        print("Alcada self: \(self.constraintHeight.constant) Alcada scroll: \(self.scrollView.frame.size.height)")
-    }
-    */
-    
     func moveScrollView(){
         let distanceToBottom = self.scrollView.frame.size.height - (activeField?.frame.origin.y)! - (activeField?.frame.size.height)!
         let collapseSpace = keyboardHeigh - distanceToBottom
@@ -143,7 +131,6 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
     }
     
     // MARK: Inici del Controller en si
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -156,9 +143,18 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
         
         // teclat numèric per defecte pel discount
         textDiscount.keyboardType = UIKeyboardType.numberPad
+        // borde textView
+        textDescription.layer.cornerRadius = 5
+        textDescription.layer.borderColor = UIColor.gray.withAlphaComponent(0.5).cgColor
+        textDescription.layer.borderWidth = 0.5
+        textDescription.clipsToBounds = true
+        // afegir click a la imatge per canviar d'imatge
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(btnSelectImage(_:)))
+        imagePicked.isUserInteractionEnabled = true
+        imagePicked.addGestureRecognizer(tapGestureRecognizer)
         
         // volia posar l'alçada en funció del botó inferior però no sé com va
-        self.constraintHeight.constant = 50
+        self.constraintHeight.constant = 100
         //self.constraintHeight.constant = self.btnUndo.frame.origin.y + self.btnUndo.frame.size.height + 10
         
         //Requerit pels events de teclat
@@ -184,17 +180,14 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
         textDescription.text = place!.description
         lblId.text = "ID: \(place!.id)"
         
-        // temporal per veure que es graba bé
-        if (place!.location != nil) {
-            let lat : NSNumber = NSNumber(value: place!.location.latitude)
-            let lng : NSNumber = NSNumber(value: place!.location.longitude)
-            lblUbicacion.text = "Position: lat:\(lat) lon:\(lng)"
-        }
+        // sempre té ubicacio
+        let lat : NSNumber = NSNumber(value: place!.location.latitude)
+        let lng : NSNumber = NSNumber(value: place!.location.longitude)
+        lblUbicacion.text = "Position: lat:\(lat) lon:\(lng)"
         
         viewPicker.selectRow(place!.type.rawValue, inComponent: 0, animated: true)
-        if (place!.type != PlaceTourist.PlacesTypes.GenericPlace){
-            let touristPlace = place as! PlaceTourist
-            textDiscount.text = touristPlace.discount_tourist
+        if let pt = place as? PlaceTourist{
+            textDiscount.text = pt.discount_tourist
         }
         updateTuristicMode()
         
@@ -221,9 +214,9 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
         var errors = [String]()
         var warnings = [String]()
         
+        // errors
         if textName.text!.count < 1 {
             errors.append("El camp 'Nom' està buit")
-
         }
         if textDescription.text!.count < 1 {
             errors.append("El camp 'Notes' està buit")
@@ -232,6 +225,7 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
             errors.append("No s'ha sel·leccionat cap imatge")
         }
         
+        // warnings
         if m_provider.ExistPlaceLike(name: textName.text!, apartFrom: self.place ){
             warnings.append("Ja existeix un Place amb el nom '\(textName.text!)'")
         }
@@ -262,7 +256,7 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
     // un cop passades les verificacions, crea o actualitza el place
     private func actualitzaCrea(_ sender: Any){
         // temporal, es farà més endavant la implementacio correcta
-        #warning ("implementar canvi de tipus")
+        #warning ("implementar canvi de tipus correctament")
         let willBeTuristic = viewPicker.selectedRow(inComponent: 0) != 0
         if place != nil && ((place is PlaceTourist && !willBeTuristic) || (!(place is PlaceTourist) && willBeTuristic)){
             // si canvia el tipus, l'elimino i el crearem de nou

@@ -32,7 +32,7 @@ class PlaceTourist: Place{
         try decodeIntern(from: decoder)
     }
     
-    var discount_tourist = "" {
+    var discount_tourist = "0" {
         // valido que sigui numèric
         didSet{
             let testNumber = Int(discount_tourist)
@@ -51,6 +51,12 @@ class PlaceTourist: Place{
     
     init(name: String, description: String, discount_tourist: String, image_in: Data?){
         super.init(type: .TouristicPlace, name: name, description: description, image_in: image_in)
+        //self.discount_tourist = discount_tourist
+        init_discount(discount_tourist: discount_tourist)
+    }
+    
+    // assigno la var fora l'init perquè es pugui cridar el mètode didSet i assigni correctament el valor entrant pels controls
+    private func init_discount(discount_tourist: String){
         self.discount_tourist = discount_tourist
     }
     

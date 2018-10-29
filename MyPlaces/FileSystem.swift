@@ -36,7 +36,7 @@ class FileSystem
     class func Read() -> String
     {
         var data:String = ""
-        print("Llegint d'aquí: \(GetPath())")
+        //print("Llegint d'aquí: \(GetPath())")
         do {
              data = try String(contentsOf: GetPath(), encoding: .utf8)
         }
@@ -80,8 +80,8 @@ class FileSystem
 
     class func Write(data:String)
     {
-        print ("Guardant aquí: \(GetPath())")
-        print ("Guardant això: \(data)")
+        //print ("Guardant aquí: \(GetPath())")
+        //print ("Guardant això: \(data)")
         do {
             try data.write(to: GetPath(), atomically: false, encoding: .utf8)
         }

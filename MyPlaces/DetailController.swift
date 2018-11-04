@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Foundation
+import MapKit
 
 class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate, UITextFieldDelegate{
     @IBOutlet weak var constraintHeight: NSLayoutConstraint!
@@ -33,6 +35,8 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
     let pickerElems1 = ["Generic place","Touristic place"]
     var m_provider = ManagerPlaces.shared()
     var place: Place?
+    
+    let m_location_manager: ManagerLocation = ManagerLocation.shared()
     
     // MARK: Codi requerit pel picker
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -169,8 +173,14 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
             fillData()
         }else{
             btnUpdate.setTitle("New", for: .normal)
+            fillDataNew()
         }
         updateTuristicMode()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        // es fa aquí i no al viewDidLoad perquè allà encara no es poden mostrar alerts
+        checkStatusLocation()
     }
     
     private func fillData(){
@@ -181,9 +191,7 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
         lblId.text = "ID: \(place!.id)"
         
         // sempre té ubicacio
-        let lat : NSNumber = NSNumber(value: place!.location.latitude)
-        let lng : NSNumber = NSNumber(value: place!.location.longitude)
-        lblUbicacion.text = "Position: lat:\(lat) lon:\(lng)"
+        fillDataLocation(position: place!.location)
         
         viewPicker.selectRow(place!.type.rawValue, inComponent: 0, animated: true)
         if let pt = place as? PlaceTourist{
@@ -194,10 +202,31 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
         imagePicked.image = UIImage(contentsOfFile: m_provider.GetPathImage(of: place!))
     }
     
+    private func fillDataLocation(position: CLLocationCoordinate2D!){
+        let lat : NSNumber = NSNumber(value: position.latitude)
+        let lng : NSNumber = NSNumber(value: position.longitude)
+        lblUbicacion.text = "Position: lat:\(lat) lon:\(lng)"
+    }
+    
+    private func fillDataNew(){
+        if let currentPosition = m_location_manager.GetLocation() {
+            fillDataLocation(position: currentPosition)
+        }
+    }
+    
     private func updateTuristicMode(){
         let isTuristic = viewPicker.selectedRow(inComponent: 0) == 1
         lblDiscount.isHidden = !isTuristic
         textDiscount.isHidden = !isTuristic
+    }
+    
+    // informem a l'usuari que no es podrà crear el Place si ha denegat l'accés a la ubicació
+    private func checkStatusLocation(){
+        if (m_location_manager.GetStatus() == CLAuthorizationStatus.denied){
+            let alert = UIAlertController(title: "Avís", message: "S'ha denegat l'accés a la ubicació. Sense aquest permís no es podran crear nous Places." , preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "D'acord", style: UIAlertAction.Style.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
     }
     
     // MARK: Actions dels buttons
@@ -223,6 +252,9 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
         }
         if imagePicked.image == nil {
             errors.append("No s'ha sel·leccionat cap imatge")
+        }
+        if m_location_manager.GetLocation() == nil {
+            errors.append("No s'ha pogut obtenir la localització actual")
         }
         
         // warnings
@@ -272,6 +304,7 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
             }else{
                 place = PlaceTourist(name: textName.text!, description: textDescription.text!, discount_tourist: textDiscount.text!, image_in: imageData)
             }
+            place!.location = m_location_manager.GetLocation()!
             m_provider.append(place!)
         }else{
             // Update
@@ -283,7 +316,6 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
                 (place as! PlaceTourist).discount_tourist = textDiscount.text!
             }
         }
-        place!.location = ManagerLocation.GetLocation()
         m_provider.updateObserversAndStore()
         
         btnBack(sender)

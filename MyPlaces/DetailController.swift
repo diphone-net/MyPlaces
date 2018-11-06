@@ -168,6 +168,7 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(hideKeyboard(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(showKeyboard(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        #warning("Sobra una lin")
         
         if (place != nil){
             fillData()

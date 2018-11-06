@@ -75,7 +75,6 @@ class FirstViewController: UITableViewController, ManagerPlacesObserver {
         
         tableView.rowHeight = UITableView.automaticDimension
         
-        
         // Add subviews to cell
         // UILabel and UIImageView
         var label: UILabel

@@ -31,7 +31,7 @@ class ManagerLocation: NSObject, CLLocationManagerDelegate
         manager.m_locationManager.allowsBackgroundLocationUpdates = true
         
         // distància mínima d'actualitzacio
-        manager.m_locationManager.distanceFilter = 500
+        manager.m_locationManager.distanceFilter = 10
         
         // forma optima d obtenir la localitzacio
         manager.m_locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -39,8 +39,6 @@ class ManagerLocation: NSObject, CLLocationManagerDelegate
         if (CLLocationManager.authorizationStatus() == CLAuthorizationStatus.notDetermined){
             manager.m_locationManager.requestWhenInUseAuthorization()
         }else{
-            #warning("linia innecessaria no?")
-            //manager.m_locationManager.startUpdatingLocation()
             manager.startLocation()
         }
     }
@@ -56,6 +54,7 @@ class ManagerLocation: NSObject, CLLocationManagerDelegate
     func GetLocation()->CLLocationCoordinate2D?{
         // controlem el cas que no s'hagi pogut obtenir localització∫
         if let loc = m_locationManager.location{
+            //print ("Current loc: Lat:\(loc.coordinate.latitude) Long:\(loc.coordinate.longitude) Alt:\(loc.altitude)")
             return loc.coordinate
         } else {
             return nil

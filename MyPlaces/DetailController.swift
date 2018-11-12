@@ -16,6 +16,7 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
     @IBOutlet weak var lblDiscount: UILabel!
     @IBOutlet weak var lblId: UILabel!
     @IBOutlet weak var lblUbicacion: UILabel!
+    @IBOutlet weak var lblDistance: UILabel!
     
     @IBOutlet weak var btnUndo: UIButton!
     @IBOutlet weak var btnUpdate: UIButton!
@@ -192,7 +193,7 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
         lblId.text = "ID: \(place!.id)"
         
         // sempre té ubicacio
-        fillDataLocation(position: place!.location)
+        fillDataLocationAndDistance(placeLocation: place!.location)
         
         viewPicker.selectRow(place!.type.rawValue, inComponent: 0, animated: true)
         if let pt = place as? PlaceTourist{
@@ -203,15 +204,34 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
         imagePicked.image = UIImage(contentsOfFile: m_provider.GetPathImage(of: place!))
     }
     
-    private func fillDataLocation(position: CLLocationCoordinate2D!){
-        let lat : NSNumber = NSNumber(value: position.latitude)
-        let lng : NSNumber = NSNumber(value: position.longitude)
-        lblUbicacion.text = "Position: lat:\(lat) lon:\(lng)"
+    private func fillDataLocationAndDistance(placeLocation: CLLocationCoordinate2D!){
+        
+        //location
+        let lat : NSNumber = NSNumber(value: placeLocation.latitude)
+        let lng : NSNumber = NSNumber(value: placeLocation.longitude)
+        lblUbicacion.text = "Location: lat:\(lat) lon:\(lng)"
+        
+        //distance
+        if let currentLocation = m_location_manager.GetLocation() {
+            let placeLocationLocation:CLLocation = CLLocation(latitude: placeLocation.latitude, longitude: placeLocation.longitude)
+            let currentLocationLocation: CLLocation = CLLocation(latitude: currentLocation.latitude, longitude: currentLocation.longitude)
+            
+            var distance:CLLocationDistance = (placeLocationLocation.distance(from: currentLocationLocation))
+            var units = "m"
+            if distance > 1000 {
+                distance = distance / 1000
+                units = "Km"
+            }
+            let fm = NumberFormatter()
+            fm.numberStyle = .decimal
+            fm.maximumFractionDigits = 0
+            lblDistance.text = "Distance from here: \(fm.string(for: distance)!)\(units)"
+        }
     }
     
     private func fillDataNew(){
-        if let currentPosition = m_location_manager.GetLocation() {
-            fillDataLocation(position: currentPosition)
+        if let currentLocation = m_location_manager.GetLocation() {
+            fillDataLocationAndDistance(placeLocation: currentLocation)
         }
     }
     

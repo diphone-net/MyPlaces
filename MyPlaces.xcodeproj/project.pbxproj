@@ -10,6 +10,7 @@
 		342E6044218F5CAE006B0F34 /* MKMyPointAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 342E6043218F5CAE006B0F34 /* MKMyPointAnnotation.swift */; };
 		34605616217794C400318158 /* ManagerLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34605615217794C400318158 /* ManagerLocation.swift */; };
 		3460561821785A0100318158 /* FileSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3460561721785A0100318158 /* FileSystem.swift */; };
+		348971C32199E97A00B4D6E7 /* center.png in Resources */ = {isa = PBXBuildFile; fileRef = 348971C22199E97A00B4D6E7 /* center.png */; };
 		8A0FE68A215A03800085C110 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0FE689215A03800085C110 /* AppDelegate.swift */; };
 		8A0FE68C215A03800085C110 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0FE68B215A03800085C110 /* FirstViewController.swift */; };
 		8A0FE68E215A03800085C110 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0FE68D215A03800085C110 /* SecondViewController.swift */; };
@@ -27,6 +28,9 @@
 		342E6043218F5CAE006B0F34 /* MKMyPointAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKMyPointAnnotation.swift; sourceTree = "<group>"; };
 		34605615217794C400318158 /* ManagerLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagerLocation.swift; sourceTree = "<group>"; };
 		3460561721785A0100318158 /* FileSystem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileSystem.swift; sourceTree = "<group>"; };
+		348971BF2199CF1700B4D6E7 /* simulation.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = simulation.gpx; path = ../../../Downloads/simulation.gpx; sourceTree = "<group>"; };
+		348971C02199D3CC00B4D6E7 /* simulationIGD.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = simulationIGD.gpx; sourceTree = "<group>"; };
+		348971C22199E97A00B4D6E7 /* center.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = center.png; sourceTree = "<group>"; };
 		8A0FE686215A03800085C110 /* MyPlaces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyPlaces.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A0FE689215A03800085C110 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8A0FE68B215A03800085C110 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -57,15 +61,25 @@
 		342E6042218F5C5C006B0F34 /* Location */ = {
 			isa = PBXGroup;
 			children = (
+				348971C02199D3CC00B4D6E7 /* simulationIGD.gpx */,
 				34605615217794C400318158 /* ManagerLocation.swift */,
 				342E6043218F5CAE006B0F34 /* MKMyPointAnnotation.swift */,
 			);
 			path = Location;
 			sourceTree = "<group>";
 		};
+		348971C12199E8DE00B4D6E7 /* img */ = {
+			isa = PBXGroup;
+			children = (
+				348971C22199E97A00B4D6E7 /* center.png */,
+			);
+			path = img;
+			sourceTree = "<group>";
+		};
 		8A0FE67D215A03800085C110 = {
 			isa = PBXGroup;
 			children = (
+				348971BF2199CF1700B4D6E7 /* simulation.gpx */,
 				8A0FE688215A03800085C110 /* MyPlaces */,
 				8A0FE687215A03800085C110 /* Products */,
 				8A0FE69F215A0AF10085C110 /* Frameworks */,
@@ -83,6 +97,7 @@
 		8A0FE688215A03800085C110 /* MyPlaces */ = {
 			isa = PBXGroup;
 			children = (
+				348971C12199E8DE00B4D6E7 /* img */,
 				8A89501C215A76A50037193E /* dataClasses */,
 				342E6042218F5C5C006B0F34 /* Location */,
 				8A0FE68F215A03800085C110 /* Main.storyboard */,
@@ -184,6 +199,7 @@
 			files = (
 				8A0FE696215A03820085C110 /* LaunchScreen.storyboard in Resources */,
 				8A0FE693215A03820085C110 /* Assets.xcassets in Resources */,
+				348971C32199E97A00B4D6E7 /* center.png in Resources */,
 				8A0FE691215A03800085C110 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

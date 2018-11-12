@@ -14,6 +14,7 @@ class SecondViewController: UIViewController, MKMapViewDelegate, ManagerPlacesOb
     @IBOutlet weak var m_map: MKMapView!
     var m_provider = ManagerPlaces.shared()
     var selectedPlace: Place? = nil
+    var trackingUser = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +22,8 @@ class SecondViewController: UIViewController, MKMapViewDelegate, ManagerPlacesOb
         
         self.m_map.delegate = self
         addMarkers()
+        addButtonCenterMap()
+        self.m_map.showsUserLocation = true
         #warning ("Es carrega cada cop? potser es fa l'addMarkers 2 cops")
         m_provider.addOberserver(object: self)
      }
@@ -44,6 +47,51 @@ class SecondViewController: UIViewController, MKMapViewDelegate, ManagerPlacesOb
         }
     }
     
+    // crea un botó per centrar el mapa a la location actual
+    func addButtonCenterMap(){
+        let image = UIImage(named: "center") as UIImage?
+        let button   = UIButton(type: UIButton.ButtonType.custom) as UIButton
+        button.frame = CGRect(origin: CGPoint(x:20, y: 20), size: CGSize(width: 25, height: 25))
+        button.setImage(image, for: .normal)
+        button.backgroundColor = .clear
+        button.alpha = 0.5
+        
+        button.addTarget(self, action: #selector(self.centerMapOnUserButtonClicked), for:.touchUpInside)
+        m_map.addSubview(button)
+    }
+    
+    @objc func centerMapOnUserButtonClicked() {
+        m_map.setUserTrackingMode(MKUserTrackingMode.follow, animated: true)
+        trackingUser = true
+    }
+    
+    // preguntem si l'usuari ha intervingut
+    private func mapViewRegionDidChangeFromUserInteraction() -> Bool {
+        let view: UIView = self.m_map.subviews[0] as UIView
+        //  Look through gesture recognizers to determine whether this region change is from user interaction
+        if let gestureRecognizers = view.gestureRecognizers {
+            for recognizer in gestureRecognizers {
+                if( recognizer.state == UIGestureRecognizer.State.began || recognizer.state == UIGestureRecognizer.State.ended ) {
+                    return true
+                }
+            }
+        }
+        return false
+    }
+    
+    // deshabilitem el tracking de l'usuari quan es mou el mapa
+    func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool){
+        if (self.mapViewRegionDidChangeFromUserInteraction()){
+            trackingUser = false
+        }
+    }
+    
+    // centra el mapa al MKAnnotationView seleccionat
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView){
+        mapView.setCenter(view.annotation!.coordinate, animated: true)
+    }
+    
+    // mostra les annotations al mapa
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         if let annotation = annotation as? MKMyPointAnnotation{
             let identifier = "CustomPinAnnotationView"
@@ -63,6 +111,16 @@ class SecondViewController: UIViewController, MKMapViewDelegate, ManagerPlacesOb
         return nil
     }
     
+    // centrar el mapa al punt actual de la ubicació
+    func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
+        if !trackingUser {return}
+        let span = MKCoordinateSpan(latitudeDelta: 0.001, longitudeDelta: 0.001)
+        let location = userLocation.coordinate
+        let region = MKCoordinateRegion(center: location ,span: span)
+        self.m_map?.setRegion(region,animated: true)
+    }
+    
+    // enviar a DetailController
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         let annotation: MKMyPointAnnotation = view.annotation as! MKMyPointAnnotation
         // Mostrar el DetailController de este place

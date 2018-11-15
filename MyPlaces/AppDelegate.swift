@@ -15,10 +15,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        
-        // declaro la var aquí perquè s'inicialitzi i comenci a buscar ubicació
-        let _ = ManagerLocation.shared()
-        
         return true
     }
 

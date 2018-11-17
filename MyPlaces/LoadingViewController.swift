@@ -17,7 +17,6 @@ class LoadingViewController: UIViewController {
         super.viewDidLoad()
         logoAnimationView.center = CGPoint(x: view.frame.size.width  / 2, y: view.frame.size.height - 100 )
         view.addSubview(logoAnimationView)
-        logoAnimationView.logoGifImageView.delegate = self
         CreateThread()
         
     }
@@ -36,7 +35,7 @@ class LoadingViewController: UIViewController {
     
     func CarregarDades(){
         print("ini loading")
-        Thread.sleep(forTimeInterval: 1)
+        Thread.sleep(forTimeInterval: 0.5)
         let _ = ManagerLocation.shared()
         let _ = ManagerPlaces.shared()
         print("fi loading")
@@ -48,20 +47,3 @@ class LoadingViewController: UIViewController {
     }
 
 }
-
-extension LoadingViewController: SwiftyGifDelegate {
-    /*func gifDidStart(sender: UIImageView) {
-
-        //performSegue(withIdentifier: "main", sender: self)
-    }
-    func gifDidStop(sender: UIImageView) {
-        print("ini stop")
-        
-    }
-    func gifDidLoop(sender: UIImageView) {
-        print("ini loop")
-        performSegue(withIdentifier: "main", sender: self)
-    }
- */
-}
-

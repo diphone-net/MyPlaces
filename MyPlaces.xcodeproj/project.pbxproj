@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		342E6044218F5CAE006B0F34 /* MKMyPointAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 342E6043218F5CAE006B0F34 /* MKMyPointAnnotation.swift */; };
+		34306D8121A00ADD004133FB /* FirstViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34306D8021A00ADD004133FB /* FirstViewTableViewCell.swift */; };
 		34605616217794C400318158 /* ManagerLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34605615217794C400318158 /* ManagerLocation.swift */; };
 		3460561821785A0100318158 /* FileSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3460561721785A0100318158 /* FileSystem.swift */; };
 		348971C32199E97A00B4D6E7 /* center.png in Resources */ = {isa = PBXBuildFile; fileRef = 348971C22199E97A00B4D6E7 /* center.png */; };
@@ -31,6 +32,7 @@
 
 /* Begin PBXFileReference section */
 		342E6043218F5CAE006B0F34 /* MKMyPointAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKMyPointAnnotation.swift; sourceTree = "<group>"; };
+		34306D8021A00ADD004133FB /* FirstViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewTableViewCell.swift; sourceTree = "<group>"; };
 		34605615217794C400318158 /* ManagerLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagerLocation.swift; sourceTree = "<group>"; };
 		3460561721785A0100318158 /* FileSystem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileSystem.swift; sourceTree = "<group>"; };
 		348971BF2199CF1700B4D6E7 /* simulation.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = simulation.gpx; path = ../../../Downloads/simulation.gpx; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 				34D93C51219B1DBF0068DE1C /* LoadingViewController.swift */,
 				34D93C53219B1E390068DE1C /* LogoAnimationView.swift */,
 				8A0FE68B215A03800085C110 /* FirstViewController.swift */,
+				34306D8021A00ADD004133FB /* FirstViewTableViewCell.swift */,
 				8A0FE68D215A03800085C110 /* SecondViewController.swift */,
 				8A0FE69D215A08B50085C110 /* DetailController.swift */,
 				8A0FE689215A03800085C110 /* AppDelegate.swift */,
@@ -296,6 +299,7 @@
 				3460561821785A0100318158 /* FileSystem.swift in Sources */,
 				34D93C52219B1DBF0068DE1C /* LoadingViewController.swift in Sources */,
 				8A0FE69E215A08B50085C110 /* DetailController.swift in Sources */,
+				34306D8121A00ADD004133FB /* FirstViewTableViewCell.swift in Sources */,
 				8A0FE68E215A03800085C110 /* SecondViewController.swift in Sources */,
 				8A0FE68A215A03800085C110 /* AppDelegate.swift in Sources */,
 				34605616217794C400318158 /* ManagerLocation.swift in Sources */,

@@ -7,24 +7,28 @@
 //
 
 import UIKit
+import ViewAnimator
 
 class FirstViewController: UITableViewController, ManagerPlacesObserver {
 
     let m_provider = ManagerPlaces.shared()
+    let animation1 = AnimationType.zoom(scale: 0.1)
+    let animatino2 = AnimationType.from(direction: .bottom, offset: 130.0)
+    var styler = Styler.shared()
     
     func onPlacesChange() {
         let view: UITableView = (self.view as? UITableView)!
         view.reloadData()
     }
     
-    // nou pel retorn despres d'afegir n elemnt
     override func viewWillAppear(_ animated: Bool) {
-        //self.tableView.reloadData()
-        // ja no cal perquè es controla per l'observer
+        UIView.animate(views: tableView.visibleCells, animations: [animation1, animatino2])
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        styler.recursiveSetStyle(v: self.view)
         
         // añadimos el controller como observer
         ManagerPlaces.shared().addOberserver(object: self)
@@ -32,7 +36,6 @@ class FirstViewController: UITableViewController, ManagerPlacesObserver {
         // no mostrar les ralletes de les celes buides
         tableView.tableFooterView = UIView(frame: CGRect.zero)
         tableView.separatorColor = UIColor.gray
-        
         // Do any additional setup after loading the view, typically from a nib.
     }
     
@@ -65,13 +68,6 @@ class FirstViewController: UITableViewController, ManagerPlacesObserver {
         }
     }
     
-    /*
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        // Devolver la altura de una fila situada en una posicion determinada
-        return 90
-    }
- */
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let place: Place = m_provider.GetItemAt(position: indexPath[1])
         
@@ -80,14 +76,11 @@ class FirstViewController: UITableViewController, ManagerPlacesObserver {
         cell.descripcio.text = place.description
         
         cell.imatge.image = UIImage(contentsOfFile: m_provider.GetPathImage(of: place))
-        
-        // arrodoniment i borde
-        cell.imatge.layer.borderWidth = 1
-        cell.imatge.layer.borderColor = UIColor.black.cgColor
-        cell.imatge.layer.cornerRadius = 10
-        // imatges rodones
-        //cell.imatge.layer.cornerRadius = cell.imatge.frame.size.width / 2
-        cell.imatge.clipsToBounds = true
+    
+        // cal aplicar l'styler perquè es creen dinàmicament
+        styler.recursiveSetStyle(v: cell)
+        // canvio el comportament estànder de l'styler per aquest UITextView
+        cell.descripcio.layer.borderWidth = 0
         
         return cell
     }

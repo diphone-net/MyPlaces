@@ -15,6 +15,7 @@ class SecondViewController: UIViewController, MKMapViewDelegate, ManagerPlacesOb
     var m_provider = ManagerPlaces.shared()
     var selectedPlace: Place? = nil
     var trackingUser = true
+    var buttonCenterMap: UIButton = UIButton(type: UIButton.ButtonType.custom) as UIButton
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,19 +51,21 @@ class SecondViewController: UIViewController, MKMapViewDelegate, ManagerPlacesOb
     // crea un botó per centrar el mapa a la location actual
     func addButtonCenterMap(){
         let image = UIImage(named: "center") as UIImage?
-        let button   = UIButton(type: UIButton.ButtonType.custom) as UIButton
-        button.frame = CGRect(origin: CGPoint(x:20, y: 20), size: CGSize(width: 25, height: 25))
-        button.setImage(image, for: .normal)
-        button.backgroundColor = .clear
-        button.alpha = 0.5
-        
-        button.addTarget(self, action: #selector(self.centerMapOnUserButtonClicked), for:.touchUpInside)
-        m_map.addSubview(button)
+        buttonCenterMap.frame = CGRect(origin: CGPoint(x:20, y: 20), size: CGSize(width: 25, height: 25))
+        buttonCenterMap.setImage(image, for: .normal)
+        buttonCenterMap.backgroundColor = .clear
+        buttonCenterMap.alpha = 0.5
+        buttonCenterMap.addTarget(self, action: #selector(self.centerMapOnUserButtonClicked), for:.touchUpInside)
+        m_map.addSubview(buttonCenterMap)
     }
     
     @objc func centerMapOnUserButtonClicked() {
         m_map.setUserTrackingMode(MKUserTrackingMode.follow, animated: true)
         trackingUser = true
+        
+        // deshabilitem el botó
+        buttonCenterMap.isEnabled = false
+        buttonCenterMap.alpha = 0.5
     }
     
     // preguntem si l'usuari ha intervingut
@@ -83,6 +86,10 @@ class SecondViewController: UIViewController, MKMapViewDelegate, ManagerPlacesOb
     func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool){
         if (self.mapViewRegionDidChangeFromUserInteraction()){
             trackingUser = false
+            
+            // habilitem el botó de centrar
+            buttonCenterMap.alpha = 1
+            buttonCenterMap.isEnabled = true
         }
     }
     

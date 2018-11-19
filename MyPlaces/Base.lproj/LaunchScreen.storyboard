@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mp.png" translatesAutoresizingMaskIntoConstraints="NO" id="XZe-sc-OAw">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mp" translatesAutoresizingMaskIntoConstraints="NO" id="XZe-sc-OAw">
                                 <rect key="frame" x="87.5" y="268.5" width="200" height="150"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="9wh-Fd-r8T"/>
@@ -52,6 +52,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="mp.png" width="606" height="372"/>
+        <image name="mp" width="606" height="372"/>
     </resources>
 </document>

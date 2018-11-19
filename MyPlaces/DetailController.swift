@@ -36,6 +36,7 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
     let pickerElems1 = ["Generic place","Touristic place"]
     var m_provider = ManagerPlaces.shared()
     var place: Place?
+    var styler = Styler.shared()
     
     let m_location_manager: ManagerLocation = ManagerLocation.shared()
     
@@ -63,6 +64,7 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
         imagePicked.contentMode = .scaleAspectFit
         imagePicked.image = image
         dismiss(animated: true, completion: nil)
+        imagePicked.alpha = 1
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController){
@@ -139,6 +141,9 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // posar estils als objectes de la view
+        styler.recursiveSetStyle(v: self.view)
+        
         // necessari per ViewDataSource
         viewPicker.delegate = self
         viewPicker.dataSource = self
@@ -148,11 +153,7 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
         
         // teclat numèric per defecte pel discount
         textDiscount.keyboardType = UIKeyboardType.numberPad
-        // borde textView
-        textDescription.layer.cornerRadius = 5
-        textDescription.layer.borderColor = UIColor.gray.withAlphaComponent(0.5).cgColor
-        textDescription.layer.borderWidth = 0.5
-        textDescription.clipsToBounds = true
+
         // afegir click a la imatge per canviar d'imatge
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(btnSelectImage(_:)))
         imagePicked.isUserInteractionEnabled = true
@@ -202,6 +203,7 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
         updateTuristicMode()
         
         imagePicked.image = UIImage(contentsOfFile: m_provider.GetPathImage(of: place!))
+        imagePicked.alpha = 1
     }
     
     private func fillDataLocationAndDistance(placeLocation: CLLocationCoordinate2D!){
@@ -271,7 +273,8 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
         if textDescription.text!.count < 1 {
             errors.append("El camp 'Notes' està buit")
         }
-        if imagePicked.image == nil {
+        //if imagePicked.image == nil {
+        if imagePicked.alpha != 1{
             errors.append("No s'ha sel·leccionat cap imatge")
         }
         if m_location_manager.GetLocation() == nil {
@@ -347,6 +350,7 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
         imagePicker.delegate = self
         imagePicker.sourceType = .photoLibrary
         imagePicker.allowsEditing = false
+    
         self.present(imagePicker, animated: true, completion: nil)
     }
     
@@ -354,14 +358,4 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
         navigationController?.popViewController(animated: true)
         dismiss(animated: true, completion: nil)
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 }

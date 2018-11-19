@@ -12,7 +12,7 @@ class FirstViewTableViewCell: UITableViewCell {
 
     @IBOutlet weak var nom: UILabel!
     @IBOutlet weak var imatge: UIImageView!
-    @IBOutlet weak var descripcio: UITextView!
+    @IBOutlet weak var descripcio: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

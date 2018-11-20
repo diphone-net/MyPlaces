@@ -15,6 +15,7 @@ class Place: Codable{
     enum PlacesTypes: Int, Codable{
         case GenericPlace
         case TouristicPlace
+        case ComercialPlace
     }
     
     enum CodingKeys: CodingKey{

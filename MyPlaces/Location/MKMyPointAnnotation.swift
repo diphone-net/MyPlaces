@@ -14,12 +14,15 @@ class MKMyPointAnnotation: NSObject, MKAnnotation{
     
     var coordinate: CLLocationCoordinate2D
     var title: String?
-    var place_id: String = ""
+    //var place_id: String = ""
     var subtitle:String?
+    var place: Place
     
-    init(coordinate: CLLocationCoordinate2D, title: String, place_id: String){
+    //init(coordinate: CLLocationCoordinate2D, title: String, place_id: String, place: Place){
+    init(coordinate: CLLocationCoordinate2D, place: Place){
         self.coordinate = coordinate
-        self.title = title
-        self.place_id = place_id
+        self.title = place.name
+        //self.place_id = place_id
+        self.place = place
     }
 }

@@ -43,7 +43,7 @@ class SecondViewController: UIViewController, MKMapViewDelegate, ManagerPlacesOb
         for i in 0..<m_provider.GetCount(){
             let p = m_provider.GetItemAt(position: i)
             let coordinada = CLLocationCoordinate2D(latitude: p.location.latitude, longitude: p.location.longitude)
-            let annotation: MKMyPointAnnotation = MKMyPointAnnotation(coordinate: coordinada, title: p.name, place_id: p.id)
+            let annotation: MKMyPointAnnotation = MKMyPointAnnotation(coordinate: coordinada, place: p)
             self.m_map.addAnnotation(annotation)
         }
     }
@@ -101,7 +101,7 @@ class SecondViewController: UIViewController, MKMapViewDelegate, ManagerPlacesOb
     // mostra les annotations al mapa
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         if let annotation = annotation as? MKMyPointAnnotation{
-            let identifier = "CustomPinAnnotationView"
+            let identifier = "CustomPinAnnotationView_Type" + String(annotation.place.type.rawValue)
             var pinView: MKPinAnnotationView
             if let dequeuedView = self.m_map?.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKPinAnnotationView {
                 dequeuedView.annotation = annotation
@@ -109,6 +109,7 @@ class SecondViewController: UIViewController, MKMapViewDelegate, ManagerPlacesOb
             } else {
                 pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
                 pinView.canShowCallout = true
+                pinView.pinTintColor = setColor(from: annotation.place.type)
                 pinView.calloutOffset = CGPoint(x: -5, y: 5)
                 pinView.rightCalloutAccessoryView = UIButton(type: .detailDisclosure) as UIView
                 pinView.setSelected(true, animated: true)
@@ -116,6 +117,19 @@ class SecondViewController: UIViewController, MKMapViewDelegate, ManagerPlacesOb
             return pinView
         }
         return nil
+    }
+    
+    func setColor(from type: Place.PlacesTypes) -> UIColor{
+        switch type{
+        case Place.PlacesTypes.GenericPlace:
+            return UIColor.red
+        case Place.PlacesTypes.TouristicPlace:
+            return UIColor.blue
+        case Place.PlacesTypes.ComercialPlace:
+            return UIColor.black
+        default:
+            return UIColor.black
+        }
     }
     
     // centrar el mapa al punt actual de la ubicació
@@ -131,7 +145,7 @@ class SecondViewController: UIViewController, MKMapViewDelegate, ManagerPlacesOb
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         let annotation: MKMyPointAnnotation = view.annotation as! MKMyPointAnnotation
         // Mostrar el DetailController de este place
-        selectedPlace = m_provider.GetItemById(id: annotation.place_id)
+        selectedPlace = m_provider.GetItemById(id: annotation.place.id)
         performSegue(withIdentifier: "showFromMap", sender: self)
     }
     

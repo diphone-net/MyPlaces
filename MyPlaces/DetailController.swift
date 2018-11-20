@@ -33,7 +33,7 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
     var keyboardHeigh: CGFloat!
     var activeField: UIView!
     var lastOffset: CGPoint! // canviat de CGFloat
-    let pickerElems1 = ["Generic place","Touristic place"]
+    let pickerElements = ["Generic","Touristic","Comercial"]
     var m_provider = ManagerPlaces.shared()
     var place: Place?
     var styler = Styler.shared()
@@ -46,11 +46,11 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return pickerElems1.count // num d'elements
+        return pickerElements.count // num d'elements
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return pickerElems1[row]
+        return pickerElements[row]
     }
     
     //func imagePickerController(_: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]){
@@ -309,12 +309,30 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
         }
     }
     
+    // obte el tipus actual
+    private func getType() -> Place.PlacesTypes {
+        switch viewPicker.selectedRow(inComponent: 0){
+        case 0:
+            return Place.PlacesTypes.GenericPlace
+        case 1:
+            return Place.PlacesTypes.TouristicPlace
+        case 2:
+            return Place.PlacesTypes.ComercialPlace
+        default:
+            print ("getType no esperado")
+            return Place.PlacesTypes.GenericPlace
+        }
+    }
+    
     // un cop passades les verificacions, crea o actualitza el place
     private func actualitzaCrea(_ sender: Any){
         // temporal, es farà més endavant la implementacio correcta
         #warning ("implementar canvi de tipus correctament")
-        let willBeTuristic = viewPicker.selectedRow(inComponent: 0) != 0
-        if place != nil && ((place is PlaceTourist && !willBeTuristic) || (!(place is PlaceTourist) && willBeTuristic)){
+        
+        let currentType = getType()
+        
+        if place != nil && (place!.type != currentType){
+        //if ((place is PlaceTourist && !willBeTuristic) || (!(place is PlaceTourist) && willBeTuristic)){
             // si canvia el tipus, l'elimino i el crearem de nou
             m_provider.remove(place!)
             place = nil
@@ -323,8 +341,8 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
         let imageData = imagePicked.image!.jpegData(compressionQuality: 1.0)
         if (place == nil){
             // New
-            if !willBeTuristic {
-                place = Place(name: textName.text!, description: textDescription.text!, image_in: imageData)
+            if currentType != Place.PlacesTypes.TouristicPlace {
+                place = Place(type: currentType, name: textName.text!, description: textDescription.text!, image_in: imageData)
             }else{
                 place = PlaceTourist(name: textName.text!, description: textDescription.text!, discount_tourist: textDiscount.text!, image_in: imageData)
             }

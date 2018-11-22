@@ -146,12 +146,21 @@ class SecondViewController: UIViewController, MKMapViewDelegate, ManagerPlacesOb
         let annotation: MKMyPointAnnotation = view.annotation as! MKMyPointAnnotation
         // Mostrar el DetailController de este place
         selectedPlace = m_provider.GetItemById(id: annotation.place.id)
-        performSegue(withIdentifier: "showFromMap", sender: self)
+        if (selectedPlace!.type == Place.PlacesTypes.ComercialPlace){
+            performSegue(withIdentifier: "showFromMapComercial", sender: self)
+        }else{
+            performSegue(withIdentifier: "showFromMap", sender: self)
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showFromMap" {
             if let destinationVC = segue.destination as? DetailController {
+                destinationVC.place = selectedPlace!
+            }
+        }
+        if segue.identifier == "showFromMapComercial" {
+            if let destinationVC = segue.destination as? DetailComercialController {
                 destinationVC.place = selectedPlace!
             }
         }

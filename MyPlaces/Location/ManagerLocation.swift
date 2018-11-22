@@ -64,4 +64,17 @@ class ManagerLocation: NSObject, CLLocationManagerDelegate
     func GetStatus() -> CLAuthorizationStatus{
         return CLLocationManager.authorizationStatus()
     }
+    
+    func getDistance(location1: CLLocationCoordinate2D, location2: CLLocationCoordinate2D) -> (CLLocationDistance, String){
+        let location1Location:CLLocation = CLLocation(latitude: location1.latitude, longitude: location1.longitude)
+        let location2Location: CLLocation = CLLocation(latitude: location2.latitude, longitude: location2.longitude)
+        
+        var distance:CLLocationDistance = (location1Location.distance(from: location2Location))
+        var units = "m"
+        if distance > 1000 {
+            distance = distance / 1000
+            units = "Km"
+        }
+        return (distance, units)
+    }
 }

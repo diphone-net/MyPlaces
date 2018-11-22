@@ -30,6 +30,9 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
     
     @IBOutlet weak var scrollView: UIScrollView!
     
+    @IBOutlet weak var trailingRemoveButton: NSLayoutConstraint!
+    @IBOutlet weak var leadingCancelButton: NSLayoutConstraint!
+    
     var keyboardHeigh: CGFloat!
     var activeField: UIView!
     var lastOffset: CGPoint! // canviat de CGFloat
@@ -155,9 +158,18 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
         textDiscount.keyboardType = UIKeyboardType.numberPad
 
         // afegir click a la imatge per canviar d'imatge
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(btnSelectImage(_:)))
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(selectImage(_:)))
         imagePicked.isUserInteractionEnabled = true
         imagePicked.addGestureRecognizer(tapGestureRecognizer)
+        
+        // mostrar botons que toquen
+        if (place != nil){
+            btnUndo.isHidden = true
+            leadingCancelButton.isActive = false
+        }else{
+            btnRemove.isHidden = true
+            trailingRemoveButton.isActive = false
+        }
         
         // volia posar l'alçada en funció del botó inferior però no sé com va
         self.constraintHeight.constant = 100
@@ -215,19 +227,11 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
         
         //distance
         if let currentLocation = m_location_manager.GetLocation() {
-            let placeLocationLocation:CLLocation = CLLocation(latitude: placeLocation.latitude, longitude: placeLocation.longitude)
-            let currentLocationLocation: CLLocation = CLLocation(latitude: currentLocation.latitude, longitude: currentLocation.longitude)
-            
-            var distance:CLLocationDistance = (placeLocationLocation.distance(from: currentLocationLocation))
-            var units = "m"
-            if distance > 1000 {
-                distance = distance / 1000
-                units = "Km"
-            }
+            let (distancia, unitats) = m_location_manager.getDistance(location1: currentLocation, location2: placeLocation)
             let fm = NumberFormatter()
             fm.numberStyle = .decimal
             fm.maximumFractionDigits = 0
-            lblDistance.text = "Distance from here: \(fm.string(for: distance)!)\(units)"
+            lblDistance.text = "Distance from here: \(fm.string(for: distancia)!)\(unitats)"
         }
     }
     
@@ -363,7 +367,7 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
         btnBack(sender)
     }
     
-    @IBAction func btnSelectImage(_ sender: Any) {
+    @objc func selectImage(_ sender: Any) {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         imagePicker.sourceType = .photoLibrary

@@ -9,7 +9,7 @@
 import UIKit
 import ViewAnimator
 
-class FirstViewController: UITableViewController, ManagerPlacesObserver {
+class FirstViewController: UITableViewController, ManagerPlacesObserver, ManagerPlacesStoreObserver {
 
     let m_provider = ManagerPlaces.shared()
     let animation1 = AnimationType.zoom(scale: 0.1)
@@ -23,6 +23,8 @@ class FirstViewController: UITableViewController, ManagerPlacesObserver {
     
     override func viewWillAppear(_ animated: Bool) {
         UIView.animate(views: tableView.visibleCells, animations: [animation1, animatino2])
+        m_provider.storeDelegate = self
+        super.viewWillAppear(animated)
     }
     
     override func viewDidLoad() {
@@ -94,10 +96,19 @@ class FirstViewController: UITableViewController, ManagerPlacesObserver {
         if (editingStyle == .delete) {
             let placeEliminar: Place = m_provider.GetItemAt(position: indexPath[1])
             m_provider.remove(placeEliminar)
-            m_provider.updateObserversAndStore()
+            m_provider.store()
         }
         if (editingStyle == .insert){
             print ("insertar")
         }
+    }
+    
+    func onPlacesStoreEnd(result: Int) {
+        self.performSelector(onMainThread: #selector(EndStore), with: nil, waitUntilDone: false)
+        
+    }
+    
+    @objc func EndStore(){
+        m_provider.updateObservers()
     }
 }

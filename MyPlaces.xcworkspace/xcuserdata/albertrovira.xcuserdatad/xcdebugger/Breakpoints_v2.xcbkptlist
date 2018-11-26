@@ -186,11 +186,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyPlaces/dataClasses/ManagerPlaces.swift"
-            timestampString = "563911276.882524"
+            timestampString = "564940633.971886"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "65"
-            endingLineNumber = "65"
+            startingLineNumber = "70"
+            endingLineNumber = "70"
             landmarkName = "load()"
             landmarkType = "7">
          </BreakpointContent>
@@ -218,11 +218,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyPlaces/FirstViewController.swift"
-            timestampString = "564419071.99617"
+            timestampString = "564940633.971981"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "93"
-            endingLineNumber = "93"
+            startingLineNumber = "95"
+            endingLineNumber = "95"
             landmarkName = "tableView(_:commit:forRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -234,12 +234,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyPlaces/Style/Styler.swift"
-            timestampString = "564341589.703451"
+            timestampString = "564747105.458522"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "32"
-            endingLineNumber = "32"
-            landmarkName = "recursiveSetStyle(v:)"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
+            landmarkName = "recursiveSetStyle(v:setBorders:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -250,12 +250,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyPlaces/Style/Styler.swift"
-            timestampString = "564341589.7036591"
+            timestampString = "564747105.4585609"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "29"
-            endingLineNumber = "29"
-            landmarkName = "recursiveSetStyle(v:)"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
+            landmarkName = "recursiveSetStyle(v:setBorders:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -266,12 +266,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyPlaces/Style/Styler.swift"
-            timestampString = "564341589.703704"
+            timestampString = "564747105.458595"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "28"
-            endingLineNumber = "28"
-            landmarkName = "recursiveSetStyle(v:)"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
+            landmarkName = "recursiveSetStyle(v:setBorders:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -352,6 +352,22 @@
             startingLineNumber = "110"
             endingLineNumber = "110"
             landmarkName = "mapView(_:viewFor:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MyPlaces/Style/Styler.swift"
+            timestampString = "564747105.458681"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "20"
+            endingLineNumber = "20"
+            landmarkName = "recursiveSetStyle(v:setBorders:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

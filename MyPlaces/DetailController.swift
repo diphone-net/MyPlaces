@@ -10,7 +10,7 @@ import UIKit
 import Foundation
 import MapKit
 
-class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate, UITextFieldDelegate{
+class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate, UITextFieldDelegate, ManagerPlacesStoreObserver{
     @IBOutlet weak var constraintHeight: NSLayoutConstraint!
     
     @IBOutlet weak var lblDiscount: UILabel!
@@ -32,6 +32,8 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
     
     @IBOutlet weak var trailingRemoveButton: NSLayoutConstraint!
     @IBOutlet weak var leadingCancelButton: NSLayoutConstraint!
+    
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     var keyboardHeigh: CGFloat!
     var activeField: UIView!
@@ -154,6 +156,9 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
         textDescription.delegate = self
         textDiscount.delegate = self
         
+        // assignem al delegate del managerplaces el DetailControler
+        m_provider.storeDelegate = self
+        
         // teclat numèric per defecte pel discount
         textDiscount.keyboardType = UIKeyboardType.numberPad
 
@@ -170,6 +175,10 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
             btnRemove.isHidden = true
             trailingRemoveButton.isActive = false
         }
+        
+        // amagar activityIndicator
+        activityIndicator.hidesWhenStopped = true
+        
         
         // volia posar l'alçada en funció del botó inferior però no sé com va
         self.constraintHeight.constant = 100
@@ -260,9 +269,8 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
     @IBAction func btnRemove(_ sender: Any) {
         if place != nil {
             m_provider.remove(place!)
-            m_provider.updateObserversAndStore()
+            m_provider.store()
         }
-        btnBack(sender)
     }
 
     // controls bàsics per guardar un place
@@ -362,9 +370,13 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
                 (place as! PlaceTourist).discount_tourist = textDiscount.text!
             }
         }
-        m_provider.updateObserversAndStore()
         
-        btnBack(sender)
+        //deshabilitem la vista
+        scrollView.alpha = 0.1
+        scrollView.isUserInteractionEnabled = false
+        
+        activityIndicator.startAnimating()
+        m_provider.store()
     }
     
     @objc func selectImage(_ sender: Any) {
@@ -375,9 +387,22 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
     
         self.present(imagePicker, animated: true, completion: nil)
     }
-    
     @IBAction func btnBack(_ sender: Any) {
+        back()
+    }
+    
+    private func back(){
         navigationController?.popViewController(animated: true)
         dismiss(animated: true, completion: nil)
+    }
+    
+    func onPlacesStoreEnd(result: Int) {
+        self.performSelector(onMainThread: #selector(EndStore), with: nil, waitUntilDone: false)
+    }
+    
+    @objc func EndStore(){
+        activityIndicator.stopAnimating()
+        m_provider.updateObservers()
+        back()
     }
 }

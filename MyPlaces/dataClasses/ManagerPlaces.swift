@@ -12,9 +12,14 @@ protocol ManagerPlacesObserver {
     func onPlacesChange()
 }
 
-class ManagerPlaces: Codable {
+protocol ManagerPlacesStoreObserver{
+    func onPlacesStoreEnd(result: Int)
+}
+
+class ManagerPlaces: NSObject, Codable {
     var places = [Place]()
     var m_observer = Array<ManagerPlacesObserver>()
+    var storeDelegate: ManagerPlacesStoreObserver? = nil
     
     // MARK: Coding metodes
     enum CodingKeys: CodingKey{
@@ -80,6 +85,11 @@ class ManagerPlaces: Codable {
     }
     
     func store(){
+        performSelector(inBackground: #selector(storeInternal), with: nil)
+    }
+    
+    @objc func storeInternal(){
+        let start = CFAbsoluteTimeGetCurrent()
         do{
             let encoder = JSONEncoder()
             let data = try encoder.encode(self)
@@ -93,6 +103,15 @@ class ManagerPlaces: Codable {
         }
         catch{
         }
+        let elapsed = CFAbsoluteTimeGetCurrent() - start
+        print(elapsed)
+        // no es pot fer l'update dins el thread en background
+        //self.updateObservers()
+        
+        if (elapsed < 1){
+            Thread.sleep(forTimeInterval: 1)
+        }
+        self.storeDelegate?.onPlacesStoreEnd(result: 1)
     }
     
     // MARK: Gestió d Observers
@@ -100,8 +119,7 @@ class ManagerPlaces: Codable {
         m_observer.append(object)
     }
     
-    func updateObserversAndStore(){
-        self.store()
+    func updateObservers(){
         m_observer.forEach{ observer in
            observer.onPlacesChange()
         }
@@ -161,3 +179,4 @@ class ManagerPlaces: Codable {
         return sharedManagerPlaces
     }
 }
+

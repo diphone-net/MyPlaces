@@ -11,13 +11,18 @@ import UIKit
 
 class Styler{
     
-    func recursiveSetStyle(v:UIView)
+    func recursiveSetStyle(v:UIView, setBorders: Bool = true)
     {
         //v.backgroundColor = UIColor(patternImage: UIImage(named: "background-1080x1920.jpg")!)
         // els backgrounds de moment els he establert a mà
+        var setBordersInternal = setBorders
         
         let colorCacaOca = UIColor(rgb: 0xF9C938, alpha: 1)
         
+        if let _ = v as? UIActivityIndicatorView{
+            // per les Activity Indicator i les subviews no tindran Border
+            setBordersInternal = false
+        }
         if let b = v as? UIButton {
             b.backgroundColor = UIColor.black
             b.tintColor = colorCacaOca
@@ -30,20 +35,24 @@ class Styler{
         }
         if let t2 = v as? UITextView {
             t2.backgroundColor = UIColor.clear
-            t2.layer.borderWidth = 1
-            t2.layer.borderColor = UIColor.black.cgColor
-            t2.layer.cornerRadius = 10
+            if (setBordersInternal){
+                t2.layer.borderWidth = 1
+                t2.layer.borderColor = UIColor.black.cgColor
+                t2.layer.cornerRadius = 10
+            }
         }
         if let i = v as? UIImageView{
-            i.layer.borderWidth = 1
-            i.layer.borderColor = UIColor.black.cgColor
-            i.layer.cornerRadius = 10
+            if (setBordersInternal){
+                i.layer.borderWidth = 1
+                i.layer.borderColor = UIColor.black.cgColor
+                i.layer.cornerRadius = 10
+            }
             // imatges rodones
             //cell.imatge.layer.cornerRadius = cell.imatge.frame.size.width / 2
             i.clipsToBounds = true
         }
         for subview in v.subviews {
-            self.recursiveSetStyle(v: subview)
+            self.recursiveSetStyle(v: subview, setBorders: setBordersInternal)
         }
     }
     

@@ -343,17 +343,23 @@
                                     <constraint firstItem="dAI-CE-NSs" firstAttribute="height" secondItem="BA6-XK-SDf" secondAttribute="height" priority="250" id="mxa-ZU-Wkk"/>
                                 </constraints>
                             </scrollView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="9CC-6B-TyG">
+                                <rect key="frame" x="177.5" y="331" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="0.97647058819999999" green="0.78823529410000004" blue="0.21960784310000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="BA6-XK-SDf" firstAttribute="top" secondItem="flG-MM-ZOQ" secondAttribute="top" id="1L6-PX-NN5"/>
                             <constraint firstItem="flG-MM-ZOQ" firstAttribute="trailing" secondItem="BA6-XK-SDf" secondAttribute="trailing" id="6E2-oW-j9a"/>
+                            <constraint firstItem="9CC-6B-TyG" firstAttribute="centerX" secondItem="dAI-CE-NSs" secondAttribute="centerX" id="HJ8-yN-li8"/>
                             <constraint firstItem="flG-MM-ZOQ" firstAttribute="bottom" secondItem="BA6-XK-SDf" secondAttribute="bottom" id="LJh-G2-TnO"/>
+                            <constraint firstItem="9CC-6B-TyG" firstAttribute="centerY" secondItem="dAI-CE-NSs" secondAttribute="centerY" id="LZ7-xK-nPU"/>
                             <constraint firstItem="BA6-XK-SDf" firstAttribute="leading" secondItem="flG-MM-ZOQ" secondAttribute="leading" id="w8K-f0-cSB"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="flG-MM-ZOQ"/>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="9CC-6B-TyG" id="Njf-jc-ETN"/>
                         <outlet property="btnRemove" destination="NSD-Xm-km2" id="nL1-Ah-T9s"/>
                         <outlet property="btnUndo" destination="HHK-ob-Y3L" id="vUM-m2-MS9"/>
                         <outlet property="btnUpdate" destination="GbO-k4-SUW" id="NQW-8k-ASi"/>
@@ -364,7 +370,7 @@
                         <outlet property="lblId" destination="KVa-Ls-t36" id="FOJ-7P-q9S"/>
                         <outlet property="lblUbicacion" destination="0a5-eb-tuw" id="2I6-do-5qC"/>
                         <outlet property="leadingCancelButton" destination="Oah-a3-frS" id="Jot-9G-IjP"/>
-                        <outlet property="scrollView" destination="BA6-XK-SDf" id="cJX-kx-OVH"/>
+                        <outlet property="scrollView" destination="BA6-XK-SDf" id="Udr-ZP-nKd"/>
                         <outlet property="textDescription" destination="jJD-ZP-DqY" id="NQs-vk-R4Y"/>
                         <outlet property="textDiscount" destination="BU5-6G-VXw" id="iZu-eW-7nV"/>
                         <outlet property="textName" destination="DQH-bJ-DgJ" id="Xdh-0h-hkN"/>

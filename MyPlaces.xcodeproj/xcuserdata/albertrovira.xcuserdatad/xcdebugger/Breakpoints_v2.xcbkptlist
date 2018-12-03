@@ -42,13 +42,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyPlaces/DetailController.swift"
-            timestampString = "564945881.53632"
+            timestampString = "565547493.1166821"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "261"
-            endingLineNumber = "261"
-            landmarkName = "checkStatusLocation()"
-            landmarkType = "7">
+            startingLineNumber = "268"
+            endingLineNumber = "268"
+            landmarkName = "DetailController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -74,7 +74,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyPlaces/DetailController.swift"
-            timestampString = "564945881.536644"
+            timestampString = "565547493.11675"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "147"
@@ -138,11 +138,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyPlaces/Location/ManagerLocation.swift"
-            timestampString = "565544330.5136369"
+            timestampString = "565547493.116837"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "55"
-            endingLineNumber = "55"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
             landmarkName = "prepareLocation(for:)"
             landmarkType = "7">
          </BreakpointContent>

@@ -10,7 +10,7 @@ import Foundation
 import MapKit
 import UserNotifications
 
-class NotificationManager{
+class NotificationManager: ManagerLocationObserver{
     
     var lastClosestPlace: Place? = nil
     var lastLocation: CLLocation? = nil
@@ -18,7 +18,10 @@ class NotificationManager{
     
     //MARK: Singleton
     private static var sharedNotificationManager: NotificationManager = {
-        return NotificationManager()
+        let shared = NotificationManager()
+        var managerLocation_provider = ManagerLocation.shared()
+        managerLocation_provider.addLocationOberserver(object: shared)
+        return shared
     }()
     
     class func shared() -> NotificationManager{
@@ -29,7 +32,7 @@ class NotificationManager{
     }
     
     // es avisat d'una nova posicio i s'encarrega de fer la notificacio
-    func newLocation(at newLocation: CLLocation){
+    private func newLocation(at newLocation: CLLocation){
         
         print ("long: \(newLocation.coordinate.longitude) lat: \(newLocation.coordinate.latitude)")
         
@@ -80,6 +83,10 @@ class NotificationManager{
             }
         }
         
+    }
+    
+    func onLocationChange(newLocation: CLLocation) {
+        self.newLocation(at: newLocation)
     }
     
 }

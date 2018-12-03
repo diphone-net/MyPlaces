@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import MapKit
 
-class DetailComercialController: UIViewController {
+class DetailComercialController: UIViewController, ManagerLocationObserver{
 
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var image: UIImageView!
@@ -24,6 +25,7 @@ class DetailComercialController: UIViewController {
         super.viewDidLoad()
         m_styler.recursiveSetStyle(v: self.view)
         populate()
+        m_location_manager.addLocationOberserver(object: self)
     }
     
     private func populate(){
@@ -34,11 +36,22 @@ class DetailComercialController: UIViewController {
         
         //distance
         if let currentLocation = m_location_manager.GetLocation() {
-            let (distancia, unitats) = m_location_manager.getDistance(location1: currentLocation, location2: place!.location)
-            let fm = NumberFormatter()
-            fm.numberStyle = .decimal
-            fm.maximumFractionDigits = 0
-            distance.text = "Distance from here: \(fm.string(for: distancia)!)\(unitats)"
+            fillDistance(currentLocation: currentLocation)
         }
+    }
+    
+    #warning("duplicada")
+    func fillDistance(currentLocation: CLLocationCoordinate2D){
+        assert(place != nil)
+        
+        let (distancia, unitats) = m_location_manager.getDistance(location1: currentLocation, location2: place!.location)
+        let fm = NumberFormatter()
+        fm.numberStyle = .decimal
+        fm.maximumFractionDigits = 0
+        distance.text = "Distance from here: \(fm.string(for: distancia)!)\(unitats)"
+    }
+    
+    func onLocationChange(newLocation: CLLocation) {
+        fillDistance(currentLocation: newLocation.coordinate)
     }
 }

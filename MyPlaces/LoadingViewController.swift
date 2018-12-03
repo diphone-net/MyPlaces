@@ -45,6 +45,8 @@ class LoadingViewController: UIViewController {
     
     @objc func ThreadEnd(){
         let _ = ManagerLocation.shared()
+        let _ = NotificationManager.shared()
+        
         performSegue(withIdentifier: "main", sender: self)
     }
 

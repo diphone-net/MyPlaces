@@ -10,7 +10,7 @@ import UIKit
 import Foundation
 import MapKit
 
-class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate, UITextFieldDelegate, ManagerPlacesStoreObserver{
+class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate, UITextFieldDelegate, ManagerPlacesStoreObserver, ManagerLocationObserver{
     @IBOutlet weak var constraintHeight: NSLayoutConstraint!
     
     @IBOutlet weak var lblDiscount: UILabel!
@@ -200,6 +200,9 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
             fillDataNew()
         }
         updateTuristicMode()
+        
+        // s'afegeix com a observer per quan s'updati la posició
+        m_location_manager.addLocationOberserver(object: self)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -236,12 +239,19 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
         
         //distance
         if let currentLocation = m_location_manager.GetLocation() {
-            let (distancia, unitats) = m_location_manager.getDistance(location1: currentLocation, location2: placeLocation)
-            let fm = NumberFormatter()
-            fm.numberStyle = .decimal
-            fm.maximumFractionDigits = 0
-            lblDistance.text = "Distance from here: \(fm.string(for: distancia)!)\(unitats)"
+            fillDistance(currentLocation: currentLocation)
         }
+    }
+    
+    #warning("Funcio duplicada")
+    func fillDistance(currentLocation: CLLocationCoordinate2D){
+        assert(place != nil)
+        
+        let (distancia, unitats) = m_location_manager.getDistance(location1: currentLocation, location2: place!.location)
+        let fm = NumberFormatter()
+        fm.numberStyle = .decimal
+        fm.maximumFractionDigits = 0
+        lblDistance.text = "Distance from here: \(fm.string(for: distancia)!)\(unitats)"
     }
     
     private func fillDataNew(){
@@ -404,5 +414,13 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
         activityIndicator.stopAnimating()
         m_provider.updateObservers()
         back()
+    }
+    
+    func onLocationChange(newLocation: CLLocation) {
+        if (place == nil){
+            return
+        }
+        
+        fillDistance(currentLocation: newLocation.coordinate)
     }
 }

@@ -10,15 +10,20 @@ import Foundation
 import MapKit
 import CoreLocation
 
+// protocol perquè qui vulgui, sigui avisat que la location ha canviat (ara mateix els 2 detailController i el NotificationManager)
+protocol ManagerLocationObserver{
+    func onLocationChange(newLocation: CLLocation)
+}
+
 class ManagerLocation: NSObject, CLLocationManagerDelegate
 {
     static var pos:Int = 0
     var m_locationManager: CLLocationManager!
-    var notificationManager_provider: NotificationManager = NotificationManager.shared()
+    var locationObservers = Array<ManagerLocationObserver>()
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let currentLocation: CLLocation = locations[locations.endIndex - 1 ]
-        notificationManager_provider.newLocation(at: currentLocation)
+        updateLocationObservers(newLocation: currentLocation)
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
@@ -89,5 +94,16 @@ class ManagerLocation: NSObject, CLLocationManagerDelegate
             units = "Km"
         }
         return (distance, units)
+    }
+    
+    // MARK: Gestió d Observers
+    func addLocationOberserver(object: ManagerLocationObserver){
+        locationObservers.append(object)
+    }
+    
+    func updateLocationObservers(newLocation: CLLocation){
+        locationObservers.forEach{ observer in
+            observer.onLocationChange(newLocation: newLocation)
+        }
     }
 }

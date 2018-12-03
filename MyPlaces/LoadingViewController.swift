@@ -36,13 +36,15 @@ class LoadingViewController: UIViewController {
     func CarregarDades(){
         print("ini loading")
         Thread.sleep(forTimeInterval: 0.5)
-        let _ = ManagerLocation.shared()
+        // no s'hauria de fer aqui
+        //let _ = ManagerLocation.shared()
         let _ = ManagerPlaces.shared()
         print("fi loading")
         self.performSelector(onMainThread: #selector(self.ThreadEnd), with: nil, waitUntilDone: true)
     }
     
     @objc func ThreadEnd(){
+        let _ = ManagerLocation.shared()
         performSegue(withIdentifier: "main", sender: self)
     }
 

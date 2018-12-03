@@ -11,6 +11,7 @@
 		34306D8121A00ADD004133FB /* FirstViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34306D8021A00ADD004133FB /* FirstViewTableViewCell.swift */; };
 		34605616217794C400318158 /* ManagerLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34605615217794C400318158 /* ManagerLocation.swift */; };
 		3460561821785A0100318158 /* FileSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3460561721785A0100318158 /* FileSystem.swift */; };
+		34714C0621B57E0700E75A27 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34714C0521B57E0700E75A27 /* NotificationManager.swift */; };
 		34D93C52219B1DBF0068DE1C /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D93C51219B1DBF0068DE1C /* LoadingViewController.swift */; };
 		34D93C54219B1E390068DE1C /* LogoAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D93C53219B1E390068DE1C /* LogoAnimationView.swift */; };
 		34D93C58219B3B6D0068DE1C /* loader.gif in Resources */ = {isa = PBXBuildFile; fileRef = 34D93C57219B3B6D0068DE1C /* loader.gif */; };
@@ -35,6 +36,7 @@
 		34306D8021A00ADD004133FB /* FirstViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewTableViewCell.swift; sourceTree = "<group>"; };
 		34605615217794C400318158 /* ManagerLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagerLocation.swift; sourceTree = "<group>"; };
 		3460561721785A0100318158 /* FileSystem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileSystem.swift; sourceTree = "<group>"; };
+		34714C0521B57E0700E75A27 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		348971C02199D3CC00B4D6E7 /* simulationIGD.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = simulationIGD.gpx; sourceTree = "<group>"; };
 		34D93C51219B1DBF0068DE1C /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		34D93C53219B1E390068DE1C /* LogoAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoAnimationView.swift; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 				8A89501A215A74E90037193E /* Place.swift */,
 				8A89501D215A76CE0037193E /* PlaceTourist.swift */,
 				8A89501F215A7BD80037193E /* ManagerPlaces.swift */,
+				34714C0521B57E0700E75A27 /* NotificationManager.swift */,
 			);
 			path = dataClasses;
 			sourceTree = "<group>";
@@ -297,6 +300,7 @@
 				34E1EE4421A46667005427C6 /* DetailComercialController.swift in Sources */,
 				34D93C54219B1E390068DE1C /* LogoAnimationView.swift in Sources */,
 				3460561821785A0100318158 /* FileSystem.swift in Sources */,
+				34714C0621B57E0700E75A27 /* NotificationManager.swift in Sources */,
 				34D93C52219B1DBF0068DE1C /* LoadingViewController.swift in Sources */,
 				8A0FE69E215A08B50085C110 /* DetailController.swift in Sources */,
 				34306D8121A00ADD004133FB /* FirstViewTableViewCell.swift in Sources */,

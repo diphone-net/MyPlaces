@@ -8,11 +8,22 @@
 
 import Foundation
 import MapKit
+import CoreLocation
 
 class ManagerLocation: NSObject, CLLocationManagerDelegate
 {
     static var pos:Int = 0
     var m_locationManager: CLLocationManager!
+    var notificationManager_provider: NotificationManager = NotificationManager.shared()
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let currentLocation: CLLocation = locations[locations.endIndex - 1 ]
+        notificationManager_provider.newLocation(at: currentLocation)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print ("Error: \(error)")
+    }
     
     private static var sharedManagerLocation: ManagerLocation = {
         var singletonManager: ManagerLocation?
@@ -37,8 +48,10 @@ class ManagerLocation: NSObject, CLLocationManagerDelegate
         manager.m_locationManager.desiredAccuracy = kCLLocationAccuracyBest
         
         if (CLLocationManager.authorizationStatus() == CLAuthorizationStatus.notDetermined){
-            manager.m_locationManager.requestWhenInUseAuthorization()
-        }else{
+            //manager.m_locationManager.requestWhenInUseAuthorization()
+            manager.m_locationManager.requestAlwaysAuthorization()
+        }
+        if (CLLocationManager.locationServicesEnabled()){
             manager.startLocation()
         }
     }

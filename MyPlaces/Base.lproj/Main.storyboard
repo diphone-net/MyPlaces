@@ -108,25 +108,46 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dCp-2Y-wPH">
+                                            <rect key="frame" x="332" y="20" width="23" height="48"/>
+                                            <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="24"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" alpha="0.90000000000000002" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="offer2" translatesAutoresizingMaskIntoConstraints="NO" id="XYb-68-Ku6">
+                                            <rect key="frame" x="307" y="20" width="48" height="48"/>
+                                            <accessibility key="accessibilityConfiguration" identifier="saleImage"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="XYb-68-Ku6" secondAttribute="height" multiplier="1:1" id="BaG-YJ-mGp"/>
+                                            </constraints>
+                                        </imageView>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstItem="npW-Rx-KGn" firstAttribute="leading" secondItem="f4c-GN-rAU" secondAttribute="leading" id="3bN-gz-qk5"/>
                                         <constraint firstItem="p67-ni-oM9" firstAttribute="leading" secondItem="wTz-YK-jcP" secondAttribute="leading" constant="20" symbolic="YES" id="5ms-8g-WAN"/>
+                                        <constraint firstItem="XYb-68-Ku6" firstAttribute="top" secondItem="wTz-YK-jcP" secondAttribute="top" constant="20" symbolic="YES" id="KkX-aI-yK1"/>
                                         <constraint firstAttribute="bottom" secondItem="p67-ni-oM9" secondAttribute="bottom" constant="20" symbolic="YES" id="KlU-eN-0Uj"/>
+                                        <constraint firstItem="dCp-2Y-wPH" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="f4c-GN-rAU" secondAttribute="trailing" constant="8" symbolic="YES" id="RI2-gK-Zou"/>
                                         <constraint firstItem="f4c-GN-rAU" firstAttribute="leading" secondItem="p67-ni-oM9" secondAttribute="trailing" constant="20" id="SKf-TI-svg"/>
+                                        <constraint firstItem="dCp-2Y-wPH" firstAttribute="height" secondItem="p67-ni-oM9" secondAttribute="height" multiplier="0.8" id="TqP-LH-rfs"/>
                                         <constraint firstItem="npW-Rx-KGn" firstAttribute="top" secondItem="f4c-GN-rAU" secondAttribute="bottom" constant="8" symbolic="YES" id="Uhh-uk-wup"/>
-                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="npW-Rx-KGn" secondAttribute="trailing" constant="20" symbolic="YES" id="ZpM-NW-kSM"/>
-                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="f4c-GN-rAU" secondAttribute="trailing" constant="20" symbolic="YES" id="jil-nZ-kKp"/>
+                                        <constraint firstItem="XYb-68-Ku6" firstAttribute="height" secondItem="p67-ni-oM9" secondAttribute="height" multiplier="0.8" id="dpH-CP-u8j"/>
+                                        <constraint firstItem="dCp-2Y-wPH" firstAttribute="top" secondItem="wTz-YK-jcP" secondAttribute="top" constant="20" symbolic="YES" id="hVW-up-DGJ"/>
+                                        <constraint firstAttribute="trailing" secondItem="dCp-2Y-wPH" secondAttribute="trailing" constant="20" symbolic="YES" id="q4A-1A-ueA"/>
+                                        <constraint firstItem="dCp-2Y-wPH" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="npW-Rx-KGn" secondAttribute="trailing" constant="8" symbolic="YES" id="rDT-pM-imO"/>
                                         <constraint firstItem="p67-ni-oM9" firstAttribute="top" secondItem="f4c-GN-rAU" secondAttribute="top" id="uSt-Vs-l6P"/>
                                         <constraint firstItem="p67-ni-oM9" firstAttribute="top" secondItem="wTz-YK-jcP" secondAttribute="top" constant="20" symbolic="YES" id="uiu-Vg-HTP"/>
+                                        <constraint firstAttribute="trailing" secondItem="XYb-68-Ku6" secondAttribute="trailing" constant="20" symbolic="YES" id="xAo-ku-UA3"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="descripcio" destination="npW-Rx-KGn" id="ERD-Co-EW4"/>
+                                    <outlet property="discount" destination="dCp-2Y-wPH" id="aRi-IR-hXU"/>
                                     <outlet property="imatge" destination="p67-ni-oM9" id="Tfy-f8-OO2"/>
                                     <outlet property="nom" destination="f4c-GN-rAU" id="Tc2-Ys-YJy"/>
+                                    <outlet property="sale" destination="XYb-68-Ku6" id="25u-ie-5CC"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -159,10 +180,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BA6-XK-SDf">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dAI-CE-NSs">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kac-gt-TUo">
                                                 <rect key="frame" x="20" y="92.5" width="45" height="21"/>
@@ -366,7 +387,7 @@
                                 </constraints>
                             </scrollView>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="9CC-6B-TyG">
-                                <rect key="frame" x="177.5" y="331" width="20" height="20"/>
+                                <rect key="frame" x="177.5" y="333.5" width="20" height="20"/>
                             </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="0.97647058819999999" green="0.78823529410000004" blue="0.21960784310000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -563,9 +584,10 @@
         <image name="addimage" width="1024" height="1024"/>
         <image name="first" width="16" height="16"/>
         <image name="mp" width="606" height="372"/>
+        <image name="offer2" width="227" height="222"/>
         <image name="second" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="IFV-xp-VWV"/>
+        <segue reference="3tV-Sd-B4v"/>
     </inferredMetricsTieBreakers>
 </document>

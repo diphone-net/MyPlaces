@@ -23,6 +23,10 @@ class Styler{
             // per les Activity Indicator i les subviews no tindran Border
             setBordersInternal = false
         }
+        if v.accessibilityIdentifier == "saleImage" {
+            setBordersInternal = false
+        }
+        
         if let b = v as? UIButton {
             b.backgroundColor = UIColor.black
             b.tintColor = colorCacaOca

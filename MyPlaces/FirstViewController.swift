@@ -76,8 +76,12 @@ class FirstViewController: UITableViewController, ManagerPlacesObserver, Manager
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellImage") as! FirstViewTableViewCell
         cell.nom.text = place.name
         cell.descripcio.text = place.description
-        
         cell.imatge.image = UIImage(contentsOfFile: m_provider.GetPathImage(of: place))
+        cell.discount.text = ""
+        if let touristPlace = place as? PlaceTourist{
+            cell.discount.text = touristPlace.discount_tourist + "%"
+        }
+        cell.sale.isHidden = (place.type != Place.PlacesTypes.ComercialPlace)
     
         // cal aplicar l'styler perquè es creen dinàmicament
         styler.recursiveSetStyle(v: cell)

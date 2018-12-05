@@ -84,4 +84,13 @@ class Place: Codable{
         self.image = image_in
         self.type = type
     }
+    
+    init(genericPlace: Place){
+        self.name = genericPlace.name
+        self.description = genericPlace.description
+        self.image = genericPlace.image
+        self.id = genericPlace.id
+        self.type = PlacesTypes.GenericPlace
+        self.location = genericPlace.location
+    }
 }

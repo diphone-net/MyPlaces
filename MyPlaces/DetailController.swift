@@ -379,26 +379,10 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
         #warning ("implementar canvi de tipus correctament")
         
         let currentType = getType()
-        
-        if place != nil && (place!.type != currentType){
-        //if ((place is PlaceTourist && !willBeTuristic) || (!(place is PlaceTourist) && willBeTuristic)){
-            // si canvia el tipus, l'elimino i el crearem de nou
-            m_provider.remove(place!)
-            place = nil
-        }
-        
         let imageData = imagePicked.image!.jpegData(compressionQuality: 1.0)
-        if (place == nil){
-            // New
-            if currentType != Place.PlacesTypes.TouristicPlace {
-                place = Place(type: currentType, name: textName.text!, description: textDescription.text!, image_in: imageData)
-            }else{
-                place = PlaceTourist(name: textName.text!, description: textDescription.text!, discount_tourist: textDiscount.text!, image_in: imageData)
-            }
-            place!.location = m_location_manager.GetLocation()!
-            m_provider.append(place!)
-        }else{
-            // Update
+        
+        if (place != nil){
+            actualitzaCrea_GestionaCanviType(currentType: currentType)
             place!.name = textName.text!
             place!.description = textDescription.text!
             // l'exercici 4 diu que no es faci però està tant a mà que ho faig
@@ -406,6 +390,14 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
             if (place is PlaceTourist){
                 (place as! PlaceTourist).discount_tourist = textDiscount.text!
             }
+        }else{
+            if currentType != Place.PlacesTypes.TouristicPlace {
+                place = Place(type: currentType, name: textName.text!, description: textDescription.text!, image_in: imageData)
+            }else{
+                place = PlaceTourist(name: textName.text!, description: textDescription.text!, discount_tourist: textDiscount.text!, image_in: imageData)
+            }
+            place!.location = m_location_manager.GetLocation()!
+            m_provider.append(place!)
         }
         
         //deshabilitem la vista
@@ -414,6 +406,24 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
         
         activityIndicator.startAnimating()
         m_provider.store()
+    }
+    
+    // S'encarrega de fer el downcasting o 'upcasting' del place i actualitzar managerPlaces
+    func actualitzaCrea_GestionaCanviType(currentType: Place.PlacesTypes){
+        
+        if (place!.type == currentType) {return}
+        
+        //realment es crea el nou place com a copia de l'anterior i es substitueix a l'array
+        
+        if (currentType == Place.PlacesTypes.TouristicPlace){
+            // downCasting
+            place = PlaceTourist(genericPlace: place!)
+        }else{
+            // upcasting
+            place = Place(genericPlace: place!)
+            place!.type = currentType
+        }
+        m_provider.replace(newPlace: place!)
     }
     
     @objc func selectImage(_ sender: Any) {

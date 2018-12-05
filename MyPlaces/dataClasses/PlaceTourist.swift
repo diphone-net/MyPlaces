@@ -55,6 +55,11 @@ class PlaceTourist: Place{
         init_discount(discount_tourist: discount_tourist)
     }
     
+    override init(genericPlace: Place){
+        super.init(genericPlace: genericPlace)
+        self.type = PlacesTypes.TouristicPlace
+    }
+    
     // assigno la var fora l'init perquè es pugui cridar el mètode didSet i assigni correctament el valor entrant pels controls
     private func init_discount(discount_tourist: String){
         self.discount_tourist = discount_tourist

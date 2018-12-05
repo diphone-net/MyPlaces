@@ -134,6 +134,15 @@ class ManagerPlaces: NSObject, Codable {
         places = places.filter({$0.id != value.id})
     }
     
+    // util per intercanviar places quan han canviat de Subclass
+    func replace(newPlace: Place){
+        for position in 0..<places.count{
+            if (places[position].id == newPlace.id){
+                places[position] = newPlace
+            }
+        }
+    }
+    
     func GetCount() -> Int{
         return places.count
     }

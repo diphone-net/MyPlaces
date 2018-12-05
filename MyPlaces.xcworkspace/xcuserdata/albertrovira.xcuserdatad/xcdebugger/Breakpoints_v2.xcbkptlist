@@ -362,7 +362,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyPlaces/Location/ManagerLocation.swift"
-            timestampString = "565547493.1165349"
+            timestampString = "565602478.620342"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "61"
@@ -378,7 +378,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyPlaces/dataClasses/NotificationManager.swift"
-            timestampString = "565547493.1169209"
+            timestampString = "565602478.621961"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "29"
@@ -426,12 +426,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyPlaces/Location/ManagerLocation.swift"
-            timestampString = "565547493.116976"
+            timestampString = "565602478.622035"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "25"
             endingLineNumber = "25"
             landmarkName = "locationManager(_:didUpdateLocations:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MyPlaces/DetailController.swift"
+            timestampString = "565687011.529948"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "303"
+            endingLineNumber = "303"
+            landmarkName = "btnSetCurrent(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

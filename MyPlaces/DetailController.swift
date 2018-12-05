@@ -21,6 +21,7 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
     @IBOutlet weak var btnUndo: UIButton!
     @IBOutlet weak var btnUpdate: UIButton!
     @IBOutlet weak var btnRemove: UIButton!
+    @IBOutlet weak var btnSetCurrent: UIButton!
     
     @IBOutlet weak var textName: UITextField!
     @IBOutlet weak var textDescription: UITextView!
@@ -66,7 +67,7 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
         //print(UIImagePickerController.isSourceTypeAvailable(.photoLibrary))
         view.endEditing(true)
         let image = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
-        imagePicked.contentMode = .scaleAspectFit
+        imagePicked.contentMode = .scaleAspectFill
         imagePicked.image = image
         dismiss(animated: true, completion: nil)
         imagePicked.alpha = 1
@@ -167,23 +168,6 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
         imagePicked.isUserInteractionEnabled = true
         imagePicked.addGestureRecognizer(tapGestureRecognizer)
         
-        // mostrar botons que toquen
-        if (place != nil){
-            btnUndo.isHidden = true
-            leadingCancelButton.isActive = false
-        }else{
-            btnRemove.isHidden = true
-            trailingRemoveButton.isActive = false
-        }
-        
-        // amagar activityIndicator
-        activityIndicator.hidesWhenStopped = true
-        
-        
-        // volia posar l'alçada en funció del botó inferior però no sé com va
-        self.constraintHeight.constant = 100
-        //self.constraintHeight.constant = self.btnUndo.frame.origin.y + self.btnUndo.frame.size.height + 10
-        
         //Requerit pels events de teclat
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
@@ -199,7 +183,8 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
             btnUpdate.setTitle("New", for: .normal)
             fillDataNew()
         }
-        updateTuristicMode()
+        
+        setVisualAspects()
         
         // s'afegeix com a observer per quan s'updati la posició
         m_location_manager.addLocationOberserver(object: self)
@@ -235,7 +220,10 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
         //location
         let lat : NSNumber = NSNumber(value: placeLocation.latitude)
         let lng : NSNumber = NSNumber(value: placeLocation.longitude)
-        lblUbicacion.text = "Location: lat:\(lat) lon:\(lng)"
+        let fm = NumberFormatter()
+        fm.numberStyle = .decimal
+        fm.maximumFractionDigits = 6
+        lblUbicacion.text = "Lat: \(fm.string(for: lat)!) Lon: \(fm.string(for: lng)!)"
         
         //distance
         if let currentLocation = m_location_manager.GetLocation() {
@@ -245,9 +233,14 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
     
     #warning("Funcio duplicada")
     func fillDistance(currentLocation: CLLocationCoordinate2D){
-        assert(place != nil)
         
-        let (distancia, unitats) = m_location_manager.getDistance(location1: currentLocation, location2: place!.location)
+        var distancia = CLLocationDistance()
+        var unitats = "m"
+        
+        if (place != nil){
+            (distancia, unitats) = m_location_manager.getDistance(location1: currentLocation, location2: place!.location)
+        }
+        
         let fm = NumberFormatter()
         fm.numberStyle = .decimal
         fm.maximumFractionDigits = 0
@@ -258,6 +251,29 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
         if let currentLocation = m_location_manager.GetLocation() {
             fillDataLocationAndDistance(placeLocation: currentLocation)
         }
+    }
+    
+    private func setVisualAspects(){
+        btnSetCurrent.isEnabled = !(place == nil)
+        updateTuristicMode()
+        
+        // mostrar botons que toquen
+        if (place != nil){
+            btnUndo.isHidden = true
+            leadingCancelButton.isActive = false
+        }else{
+            btnRemove.isHidden = true
+            trailingRemoveButton.isActive = false
+        }
+        
+        // amagar activityIndicator
+        activityIndicator.hidesWhenStopped = true
+        
+        
+        // volia posar l'alçada en funció del botó inferior però no sé com va
+        self.constraintHeight.constant = 100
+        //self.constraintHeight.constant = self.btnUndo.frame.origin.y + self.btnUndo.frame.size.height + 10
+        
     }
     
     private func updateTuristicMode(){
@@ -283,6 +299,17 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
         }
     }
 
+    @IBAction func btnSetCurrent(_ sender: Any) {
+        if let currentLocation = m_location_manager.GetLocation() {
+            place!.location = currentLocation
+            fillDataLocationAndDistance(placeLocation: place!.location)
+        }else{
+            let alert = UIAlertController(title: "Alert", message: "Current location is not available", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
     // controls bàsics per guardar un place
     private func checkDataIsOk() -> ([String],[String]) {
         var errors = [String]()

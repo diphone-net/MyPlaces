@@ -35,7 +35,8 @@ class LoadingViewController: UIViewController {
     
     func CarregarDades(){
         print("ini loading")
-        Thread.sleep(forTimeInterval: 0.5)
+        // purament per motius pedagogics
+        Thread.sleep(forTimeInterval: 1)
         // no s'hauria de fer aqui
         //let _ = ManagerLocation.shared()
         let _ = ManagerPlaces.shared()

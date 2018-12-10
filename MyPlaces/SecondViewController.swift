@@ -113,7 +113,7 @@ class SecondViewController: UIViewController, MKMapViewDelegate, ManagerPlacesOb
                 pinView.pinTintColor = setColor(from: annotation.place.type)
                 pinView.calloutOffset = CGPoint(x: -5, y: 5)
                 pinView.rightCalloutAccessoryView = UIButton(type: .detailDisclosure) as UIView
-                pinView.setSelected(true, animated: true)
+                //pinView.setSelected(true, animated: true)
             }
             return pinView
         }

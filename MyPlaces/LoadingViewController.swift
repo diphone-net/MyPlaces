@@ -34,21 +34,21 @@ class LoadingViewController: UIViewController {
     }
     
     func CarregarDades(){
-        print("ini loading")
+        //print("ini loading")
         // purament per motius pedagogics
         Thread.sleep(forTimeInterval: 1)
         // no s'hauria de fer aqui
         //let _ = ManagerLocation.shared()
         let _ = ManagerPlaces.shared()
-        print("fi loading")
+        //print("fi loading")
         self.performSelector(onMainThread: #selector(self.ThreadEnd), with: nil, waitUntilDone: true)
     }
     
     @objc func ThreadEnd(){
+        // inicialitzem els managers perquè estiguin disponibles quan els necessitem
         let _ = ManagerLocation.shared()
         let _ = NotificationManager.shared()
         
         performSegue(withIdentifier: "main", sender: self)
     }
-
 }

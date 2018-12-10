@@ -27,7 +27,7 @@ class ManagerLocation: NSObject, CLLocationManagerDelegate
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print ("Error: \(error)")
+        print ("Ubicació no trobada. Detail error: \(error)")
     }
     
     private static var sharedManagerLocation: ManagerLocation = {

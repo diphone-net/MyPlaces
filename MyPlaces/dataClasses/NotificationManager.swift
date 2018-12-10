@@ -34,7 +34,7 @@ class NotificationManager: ManagerLocationObserver{
     // es avisat d'una nova posicio i s'encarrega de fer la notificacio
     private func newLocation(at newLocation: CLLocation){
         
-        print ("long: \(newLocation.coordinate.longitude) lat: \(newLocation.coordinate.latitude)")
+        //print ("long: \(newLocation.coordinate.longitude) lat: \(newLocation.coordinate.latitude)")
         
         if (lastLocation != nil && newLocation.coordinate.longitude == lastLocation!.coordinate.longitude && newLocation.coordinate.latitude == lastLocation?.coordinate.latitude){
             // si es el mateix punt no fem res
@@ -58,7 +58,7 @@ class NotificationManager: ManagerLocationObserver{
             return
         }
         
-        print ("LastClosestPlace: \(lastClosestPlace?.name) CurrentClosestPlace: \(closestPlace?.name)")
+        //print ("LastClosestPlace: \(lastClosestPlace?.name) CurrentClosestPlace: \(closestPlace?.name)")
         
         if (lastClosestPlace != nil && closestPlace!.id == lastClosestPlace!.id){
             // si l'anterior place més pròxim és el mateix que l'actual, no fem res

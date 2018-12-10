@@ -111,7 +111,7 @@ class FirstViewController: UITableViewController, ManagerPlacesObserver, Manager
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == .delete) {
-            let placeEliminar: Place = m_provider.GetItemAt(position: indexPath[1])
+            let placeEliminar: Place = m_provider.GetItemAt(position: indexPath.row)
             m_provider.remove(placeEliminar)
             m_provider.store()
         }

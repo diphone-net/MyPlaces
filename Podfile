@@ -11,4 +11,6 @@ target 'MyPlaces' do
 	
 	pod "ViewAnimator"
 
+	#pod "Firebase/Core"
+	#pod "Firebase/Messaging"
 end

@@ -13,6 +13,7 @@
 		3460561821785A0100318158 /* FileSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3460561721785A0100318158 /* FileSystem.swift */; };
 		34714C0621B57E0700E75A27 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34714C0521B57E0700E75A27 /* NotificationManager.swift */; };
 		34B647BB21BC1D0000D128D6 /* simulationBCN.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 34B647BA21BC1D0000D128D6 /* simulationBCN.gpx */; };
+		34B647BD21BE52BA00D128D6 /* fnac.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 34B647BC21BE52BA00D128D6 /* fnac.gpx */; };
 		34D93C52219B1DBF0068DE1C /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D93C51219B1DBF0068DE1C /* LoadingViewController.swift */; };
 		34D93C54219B1E390068DE1C /* LogoAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D93C53219B1E390068DE1C /* LogoAnimationView.swift */; };
 		34D93C58219B3B6D0068DE1C /* loader.gif in Resources */ = {isa = PBXBuildFile; fileRef = 34D93C57219B3B6D0068DE1C /* loader.gif */; };
@@ -40,6 +41,7 @@
 		34714C0521B57E0700E75A27 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		348971C02199D3CC00B4D6E7 /* simulationIGD.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = simulationIGD.gpx; sourceTree = "<group>"; };
 		34B647BA21BC1D0000D128D6 /* simulationBCN.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = simulationBCN.gpx; sourceTree = "<group>"; };
+		34B647BC21BE52BA00D128D6 /* fnac.gpx */ = {isa = PBXFileReference; lastKnownFileType = text; path = fnac.gpx; sourceTree = "<group>"; };
 		34D93C51219B1DBF0068DE1C /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		34D93C53219B1E390068DE1C /* LogoAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoAnimationView.swift; sourceTree = "<group>"; };
 		34D93C57219B3B6D0068DE1C /* loader.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loader.gif; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 			isa = PBXGroup;
 			children = (
 				34B647BA21BC1D0000D128D6 /* simulationBCN.gpx */,
+				34B647BC21BE52BA00D128D6 /* fnac.gpx */,
 				348971C02199D3CC00B4D6E7 /* simulationIGD.gpx */,
 				34605615217794C400318158 /* ManagerLocation.swift */,
 				342E6043218F5CAE006B0F34 /* MKMyPointAnnotation.swift */,
@@ -239,6 +242,7 @@
 				34D93C58219B3B6D0068DE1C /* loader.gif in Resources */,
 				8A0FE691215A03800085C110 /* Main.storyboard in Resources */,
 				34B647BB21BC1D0000D128D6 /* simulationBCN.gpx in Resources */,
+				34B647BD21BE52BA00D128D6 /* fnac.gpx in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

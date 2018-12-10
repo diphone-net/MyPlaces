@@ -104,7 +104,7 @@ class ManagerPlaces: NSObject, Codable {
         catch{
         }
         let elapsed = CFAbsoluteTimeGetCurrent() - start
-        print(elapsed)
+        //print("Temps de guardat \(elapsed)")
         // no es pot fer l'update dins el thread en background
         //self.updateObservers()
         

@@ -39,10 +39,12 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
     var keyboardHeigh: CGFloat!
     var activeField: UIView!
     var lastOffset: CGPoint! // canviat de CGFloat
-    let pickerElements = ["Generic","Touristic","Comercial"]
+    let pickerElements = ["Personal","Touristic","Comercial"]
     var m_provider = ManagerPlaces.shared()
     var place: Place?
     var styler = Styler.shared()
+    
+    //var hiddenLocation: CLLocationCoordinate2D? = nil
     
     let m_location_manager: ManagerLocation = ManagerLocation.shared()
     
@@ -327,7 +329,10 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
             errors.append("No s'ha sel·leccionat cap imatge")
         }
         if m_location_manager.GetLocation() == nil {
-            errors.append("No s'ha pogut obtenir la localització actual")
+            // només si es un place nou perquè els ja creats no s'actualitzen
+            if (place == nil){
+                errors.append("No s'ha pogut obtenir la localització actual")
+            }
         }
         
         // warnings
@@ -337,6 +342,36 @@ class DetailController: UIViewController , UIPickerViewDelegate, UIPickerViewDat
         
         return (errors,warnings)
     }
+    
+    /* de moment no implementat
+ 
+    @IBAction func btnShowOnMap(_ sender: Any) {
+        var secondTab = self.tabBarController?.viewControllers![0]
+        //secondTab?.hiddenLocation = place!.location!
+        
+        if let tabBarController = self.view.window!.rootViewController as? UITabBarController {
+            var x = tabBarController.viewControllers![0]
+            tabBarController.selectedIndex = 1
+            
+            /*let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let secondViewController = storyboard.instantiateViewController(withIdentifier: "SecondViewControllerID") as! SecondViewController
+            secondViewController.hiddenLocation = place!.location!
+            */
+            /*
+            self.present(secondViewController, animated: true, completion: {
+                //This lines will be called after the view is loaded so the code will run
+                secondViewController.hiddenLocation = self.place!.location!
+            })
+            */
+            self.hiddenLocation = place!.location!
+        }
+        assert(place != nil && place?.location != nil)
+        
+        //let secondViewController = self.storyboard?.instantiateViewController(withIdentifier: "secondViewControllerID") as! SecondViewController
+        //self.navigationController!.pushViewController(secondViewController, animated: true)
+        //secondViewController.center(at: place!.location!)
+    }
+ */
     
     @IBAction func btnUpdateNew(_ sender: Any) {
         let (errors, warnings) = checkDataIsOk()

@@ -16,6 +16,7 @@ class SecondViewController: UIViewController, MKMapViewDelegate, ManagerPlacesOb
     var selectedPlace: Place? = nil
     var trackingUser = true
     var buttonCenterMap: UIButton = UIButton(type: UIButton.ButtonType.custom) as UIButton
+    //public var hiddenLocation: CLLocationCoordinate2D? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -135,10 +136,14 @@ class SecondViewController: UIViewController, MKMapViewDelegate, ManagerPlacesOb
     // centrar el mapa al punt actual de la ubicació
     func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
         if !trackingUser {return}
-        let span = MKCoordinateSpan(latitudeDelta: 0.001, longitudeDelta: 0.001)
-        let location = userLocation.coordinate
-        let region = MKCoordinateRegion(center: location ,span: span)
+        center(at: userLocation.coordinate)
+    }
+    
+    func center(at coordinate: CLLocationCoordinate2D){
+        let span = MKCoordinateSpan(latitudeDelta: 0.002, longitudeDelta: 0.002)
+        let region = MKCoordinateRegion(center: coordinate ,span: span)
         self.m_map?.setRegion(region,animated: true)
+        //self.m_map?.setCenter(coordinate, animated: true)
     }
     
     // enviar a DetailController

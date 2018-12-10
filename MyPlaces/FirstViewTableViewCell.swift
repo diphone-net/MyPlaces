@@ -13,8 +13,14 @@ class FirstViewTableViewCell: UITableViewCell {
     @IBOutlet weak var nom: UILabel!
     @IBOutlet weak var imatge: UIImageView!
     @IBOutlet weak var descripcio: UILabel!
-    @IBOutlet weak var discount: UILabel!
+    @IBOutlet  var discount: UILabel!
     @IBOutlet weak var sale: UIImageView!
+    @IBOutlet var title_trailing: NSLayoutConstraint!
+    @IBOutlet var title_icon: NSLayoutConstraint!
+    @IBOutlet var title_discount: NSLayoutConstraint!
+    @IBOutlet var description_trailing: NSLayoutConstraint!
+    @IBOutlet var description_icon: NSLayoutConstraint!
+    @IBOutlet var description_discount: NSLayoutConstraint!
     
     override func awakeFromNib() {
         super.awakeFromNib()

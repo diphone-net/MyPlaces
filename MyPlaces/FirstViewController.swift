@@ -77,11 +77,24 @@ class FirstViewController: UITableViewController, ManagerPlacesObserver, Manager
         cell.nom.text = place.name
         cell.descripcio.text = place.description
         cell.imatge.image = UIImage(contentsOfFile: m_provider.GetPathImage(of: place))
-        cell.discount.text = ""
+        var displayDiscount = false
         if let touristPlace = place as? PlaceTourist{
-            cell.discount.text = touristPlace.discount_tourist + "%"
+            if (touristPlace.discount_tourist != "0"){
+                cell.discount.text = touristPlace.discount_tourist + "%"
+                displayDiscount = true
+            }
         }
         cell.sale.isHidden = (place.type != Place.PlacesTypes.ComercialPlace)
+        cell.discount.isHidden = !displayDiscount
+        
+        // constraints en funció de la imatge o disconut lateral
+        cell.title_trailing.isActive = (place.type == Place.PlacesTypes.GenericPlace || (place.type == Place.PlacesTypes.TouristicPlace && !displayDiscount))
+        cell.title_icon.isActive = (place.type == Place.PlacesTypes.ComercialPlace)
+        cell.title_discount.isActive = (place.type == Place.PlacesTypes.TouristicPlace && displayDiscount)
+        cell.description_trailing.isActive = (place.type == Place.PlacesTypes.GenericPlace || (place.type == Place.PlacesTypes.TouristicPlace && !displayDiscount))
+        cell.description_icon.isActive = (place.type == Place.PlacesTypes.ComercialPlace)
+        cell.description_discount.isActive = (place.type == Place.PlacesTypes.TouristicPlace && displayDiscount)
+        
     
         // cal aplicar l'styler perquè es creen dinàmicament
         styler.recursiveSetStyle(v: cell)

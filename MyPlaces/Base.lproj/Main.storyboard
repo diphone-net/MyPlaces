@@ -50,7 +50,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zRc-J9-Yfv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1230" y="-53"/>
+            <point key="canvasLocation" x="-1290" y="189"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
@@ -69,7 +69,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-423" y="-52"/>
+            <point key="canvasLocation" x="-446" y="190"/>
         </scene>
         <!--My Places-->
         <scene sceneID="ffo-dy-1Hg">
@@ -102,15 +102,9 @@
                                                 <constraint firstAttribute="width" constant="60" id="rWm-hk-jI7"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="description2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="npW-Rx-KGn">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" text="description2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="npW-Rx-KGn">
                                             <rect key="frame" x="100" y="52" width="81" height="17"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dCp-2Y-wPH">
-                                            <rect key="frame" x="332" y="20" width="23" height="48"/>
-                                            <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="24"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -121,11 +115,19 @@
                                                 <constraint firstAttribute="width" secondItem="XYb-68-Ku6" secondAttribute="height" multiplier="1:1" id="BaG-YJ-mGp"/>
                                             </constraints>
                                         </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dCp-2Y-wPH">
+                                            <rect key="frame" x="332" y="20" width="23" height="48"/>
+                                            <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="24"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstItem="npW-Rx-KGn" firstAttribute="leading" secondItem="f4c-GN-rAU" secondAttribute="leading" id="3bN-gz-qk5"/>
+                                        <constraint firstItem="XYb-68-Ku6" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="f4c-GN-rAU" secondAttribute="trailing" constant="8" symbolic="YES" id="5FC-82-WhZ"/>
                                         <constraint firstItem="p67-ni-oM9" firstAttribute="leading" secondItem="wTz-YK-jcP" secondAttribute="leading" constant="20" symbolic="YES" id="5ms-8g-WAN"/>
+                                        <constraint firstItem="XYb-68-Ku6" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="npW-Rx-KGn" secondAttribute="trailing" constant="8" symbolic="YES" id="J10-nm-5OQ"/>
                                         <constraint firstItem="XYb-68-Ku6" firstAttribute="top" secondItem="wTz-YK-jcP" secondAttribute="top" constant="20" symbolic="YES" id="KkX-aI-yK1"/>
                                         <constraint firstAttribute="bottom" secondItem="p67-ni-oM9" secondAttribute="bottom" constant="20" symbolic="YES" id="KlU-eN-0Uj"/>
                                         <constraint firstItem="dCp-2Y-wPH" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="f4c-GN-rAU" secondAttribute="trailing" constant="8" symbolic="YES" id="RI2-gK-Zou"/>
@@ -134,20 +136,28 @@
                                         <constraint firstItem="npW-Rx-KGn" firstAttribute="top" secondItem="f4c-GN-rAU" secondAttribute="bottom" constant="8" symbolic="YES" id="Uhh-uk-wup"/>
                                         <constraint firstItem="XYb-68-Ku6" firstAttribute="height" secondItem="p67-ni-oM9" secondAttribute="height" multiplier="0.8" id="dpH-CP-u8j"/>
                                         <constraint firstItem="dCp-2Y-wPH" firstAttribute="top" secondItem="wTz-YK-jcP" secondAttribute="top" constant="20" symbolic="YES" id="hVW-up-DGJ"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="npW-Rx-KGn" secondAttribute="trailing" constant="20" symbolic="YES" id="ld4-1r-gPy"/>
                                         <constraint firstAttribute="trailing" secondItem="dCp-2Y-wPH" secondAttribute="trailing" constant="20" symbolic="YES" id="q4A-1A-ueA"/>
                                         <constraint firstItem="dCp-2Y-wPH" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="npW-Rx-KGn" secondAttribute="trailing" constant="8" symbolic="YES" id="rDT-pM-imO"/>
                                         <constraint firstItem="p67-ni-oM9" firstAttribute="top" secondItem="f4c-GN-rAU" secondAttribute="top" id="uSt-Vs-l6P"/>
                                         <constraint firstItem="p67-ni-oM9" firstAttribute="top" secondItem="wTz-YK-jcP" secondAttribute="top" constant="20" symbolic="YES" id="uiu-Vg-HTP"/>
                                         <constraint firstAttribute="trailing" secondItem="XYb-68-Ku6" secondAttribute="trailing" constant="20" symbolic="YES" id="xAo-ku-UA3"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="f4c-GN-rAU" secondAttribute="trailing" constant="20" symbolic="YES" id="xdd-VT-hYe"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="descripcio" destination="npW-Rx-KGn" id="ERD-Co-EW4"/>
+                                    <outlet property="description_discount" destination="rDT-pM-imO" id="LOU-GT-lQ5"/>
+                                    <outlet property="description_icon" destination="J10-nm-5OQ" id="VYW-hn-ZW9"/>
+                                    <outlet property="description_trailing" destination="ld4-1r-gPy" id="d0w-Dj-D31"/>
                                     <outlet property="discount" destination="dCp-2Y-wPH" id="aRi-IR-hXU"/>
                                     <outlet property="imatge" destination="p67-ni-oM9" id="Tfy-f8-OO2"/>
                                     <outlet property="nom" destination="f4c-GN-rAU" id="Tc2-Ys-YJy"/>
                                     <outlet property="sale" destination="XYb-68-Ku6" id="25u-ie-5CC"/>
+                                    <outlet property="title_discount" destination="RI2-gK-Zou" id="LmR-W5-BKT"/>
+                                    <outlet property="title_icon" destination="5FC-82-WhZ" id="7qJ-Gj-tZa"/>
+                                    <outlet property="title_trailing" destination="xdd-VT-hYe" id="bFY-c2-Rza"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -174,7 +184,7 @@
         <!--Detail Controller-->
         <scene sceneID="yJW-MN-WF7">
             <objects>
-                <viewController storyboardIdentifier="DetailController" id="6hV-JK-xMm" customClass="DetailController" customModule="MyPlaces" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DetailController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="6hV-JK-xMm" customClass="DetailController" customModule="MyPlaces" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5OQ-h7-MkD">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -424,7 +434,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pFb-5P-Eiz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2574" y="-115"/>
+            <point key="canvasLocation" x="2574" y="-178"/>
         </scene>
         <!--Detail Comercial Controller-->
         <scene sceneID="eEC-Ky-Ow0">
@@ -458,12 +468,9 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lJJ-PJ-DM1">
-                                <rect key="frame" x="20" y="586.5" width="335" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="A0p-15-qJ8"/>
-                                </constraints>
-                                <state key="normal" title="find the mPlace !"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iEN-eC-nty">
+                                <rect key="frame" x="20" y="634.5" width="335" height="40"/>
+                                <state key="normal" title="get the Discount!"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Offer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PNq-Nk-2Je">
                                 <rect key="frame" x="20" y="506" width="57.5" height="32"/>
@@ -471,11 +478,21 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lJJ-PJ-DM1">
+                                <rect key="frame" x="20" y="586.5" width="335" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="A0p-15-qJ8"/>
+                                </constraints>
+                                <state key="normal" title="find the mPlace"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.97647058819999999" green="0.78823529410000004" blue="0.21960784310000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="iEN-eC-nty" firstAttribute="top" secondItem="lJJ-PJ-DM1" secondAttribute="bottom" constant="8" symbolic="YES" id="1Gn-JT-05U"/>
+                            <constraint firstItem="iEN-eC-nty" firstAttribute="width" secondItem="lJJ-PJ-DM1" secondAttribute="width" id="8Vp-vn-tUZ"/>
                             <constraint firstItem="lJJ-PJ-DM1" firstAttribute="leading" secondItem="Rxd-zA-gxH" secondAttribute="leading" constant="20" id="DLS-Db-Z2X"/>
+                            <constraint firstItem="iEN-eC-nty" firstAttribute="centerX" secondItem="lJJ-PJ-DM1" secondAttribute="centerX" id="J5f-FU-NnB"/>
                             <constraint firstItem="Rxd-zA-gxH" firstAttribute="trailing" secondItem="51I-E6-PC5" secondAttribute="trailing" constant="20" id="Jao-Yn-H3T"/>
                             <constraint firstItem="lJJ-PJ-DM1" firstAttribute="top" secondItem="zQu-m8-Xrf" secondAttribute="bottom" constant="20" id="L7b-MO-CFT"/>
                             <constraint firstItem="zQu-m8-Xrf" firstAttribute="leading" secondItem="PNq-Nk-2Je" secondAttribute="leading" id="PC0-N7-nBo"/>
@@ -490,6 +507,7 @@
                             <constraint firstItem="PNq-Nk-2Je" firstAttribute="top" secondItem="3ff-8L-mr8" secondAttribute="bottom" constant="8" symbolic="YES" id="jfn-Tq-Fx3"/>
                             <constraint firstItem="9b6-8g-f0f" firstAttribute="leading" secondItem="Rxd-zA-gxH" secondAttribute="leading" constant="20" id="kAm-uc-xhe"/>
                             <constraint firstItem="Rxd-zA-gxH" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="PNq-Nk-2Je" secondAttribute="trailing" constant="20" id="njT-qb-xiy"/>
+                            <constraint firstItem="iEN-eC-nty" firstAttribute="height" secondItem="lJJ-PJ-DM1" secondAttribute="height" id="ry8-l7-rGT"/>
                             <constraint firstItem="PNq-Nk-2Je" firstAttribute="leading" secondItem="3ff-8L-mr8" secondAttribute="leading" id="wWm-6j-wBn"/>
                             <constraint firstItem="Rxd-zA-gxH" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="3ff-8L-mr8" secondAttribute="trailing" constant="20" id="y7x-zw-oU7"/>
                             <constraint firstItem="3ff-8L-mr8" firstAttribute="top" secondItem="9b6-8g-f0f" secondAttribute="bottom" constant="8" symbolic="YES" id="zek-Mn-xet"/>
@@ -505,7 +523,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tSG-fb-hGB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2574" y="580"/>
+            <point key="canvasLocation" x="2574" y="512"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="WtC-m7-rAb">
